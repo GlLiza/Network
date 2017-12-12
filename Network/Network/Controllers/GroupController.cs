@@ -76,6 +76,11 @@ namespace Network.Controllers
             return RedirectToAction("Index","Group");
         }
 
+        public ActionResult AddToGroup()
+        {
+
+        }
+
 
 
 
