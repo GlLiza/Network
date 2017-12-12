@@ -1,8 +1,10 @@
-﻿using Network.BL.WebServices;
+﻿using Microsoft.AspNet.Identity;
+using Network.BL.WebServices;
 using Network.DAL.EFModel;
 using Network.Views.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Network.Controllers
@@ -78,6 +80,25 @@ namespace Network.Controllers
 
         public ActionResult AddToGroup()
         {
+            string idAspNet = User.Identity.GetUserId();
+            var user = _userService.GetUserByAspNetId(idAspNet);
+
+            var listGroupId = _groupService.GetListOfId();
+            var listGroup = _groupService.GetGroupList(listGroupId);
+          
+
+            AddtoGroup model = new AddtoGroup();
+            model.groupList = listGroup;           
+            model.userId = user.Id;
+
+            return View("_AddToGroup",model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "group_member")]
+        public ActionResult AddToGroup(MembersOfGroup member)
+        {
+            return RedirectToAction("Index", "User");
 
         }
 

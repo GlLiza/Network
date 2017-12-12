@@ -1,1 +1,26 @@
-﻿
+﻿@model Network.Views.ViewModels.AddtoGroup
+
+<div id="addToGroupDialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Добавление в групу=пу</h4>
+            </div>
+
+            <div class="modal-body">
+                @using (Html.BeginForm("AddToGroup", "Group", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.userId)
+
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.selectedGroupId, new SelectList(Model.groupList, "Id", "Number"), "Выбери группу")
+                    </div>
+
+                    <button class="btn btn-info pull-right" type="submit" id="changePhoto">OK</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

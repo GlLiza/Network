@@ -52,37 +52,6 @@ namespace Network.BL.WebServices
             }           
         }
 
-        public void AddMembersToGroup(MembersOfGroup member)
-        {
-            if (member != null)
-            {
-                member.Id = Guid.NewGuid();
-                _groupRepository.AddMembers(member);
-            }
-        }
-
-        public void RemoveMembers(MembersOfGroup member)
-        {
-            if (member != null)
-            {
-                _groupRepository.DeleteMembers(member.Id);
-            }
-        }
-
-        public IQueryable<Guid> GetmembersListByGroupId(Guid id)
-        {
-            if (id != null)
-            {
-                var gr = _groupRepository.GetGroupById(id);
-                if (gr != null)
-                {
-                    var listId = _groupRepository.GetMembersIdByGroup(gr.Id);
-                    return listId;
-                }
-            }
-            return null;
-        }
-
         public List<Group> GetGroupsForHead(Guid headId)
         {
             if (headId != null)
@@ -114,6 +83,39 @@ namespace Network.BL.WebServices
             }
             return list;         
 
+        }
+
+
+
+        public void AddMembersToGroup(MembersOfGroup member)
+        {
+            if (member != null)
+            {
+                member.Id = Guid.NewGuid();
+                _groupRepository.AddMembers(member);
+            }
+        }
+
+        public void RemoveMembers(MembersOfGroup member)
+        {
+            if (member != null)
+            {
+                _groupRepository.DeleteMembers(member.Id);
+            }
+        }
+
+        public IQueryable<Guid> GetmembersListByGroupId(Guid id)
+        {
+            if (id != null)
+            {
+                var gr = _groupRepository.GetGroupById(id);
+                if (gr != null)
+                {
+                    var listId = _groupRepository.GetMembersIdByGroup(gr.Id);
+                    return listId;
+                }
+            }
+            return null;
         }
 
     }

@@ -55,11 +55,6 @@
 
             <div class="form-group">
                 @Html.DropDownListFor(model=>model.Head.Id, new SelectList(Model.ListLead,"Id","Name"),"Выбери руководителя")
-                @*@Html.LabelFor(model => model.HeadId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.HeadId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.HeadId, "", new { @class = "text-danger" })
-                </div>*@
             </div>
         </div>
 

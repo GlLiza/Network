@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Network.DAL.EFModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,5 +29,12 @@ namespace Network.Views.ViewModels
         public string Specialization { get; set; }
         public SelectLeadViewModel Head { get; set; }
         public List<SelectLeadViewModel> ListLead { get; set; }
+    }
+
+    public class AddtoGroup
+    {
+        public List<Group> groupList { get; set; }
+        public Guid selectedGroupId { get; set; }
+        public Guid userId { get; set; }
     }
 }

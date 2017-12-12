@@ -20,7 +20,6 @@ namespace Network.DAL.EFModel
             this.Advertisement = new HashSet<Advertisement>();
             this.MembersOfConference = new HashSet<MembersOfConference>();
             this.MembersOfGroup = new HashSet<MembersOfGroup>();
-            this.Group = new HashSet<Group>();
         }
     
         public System.Guid Id { get; set; }
@@ -34,11 +33,9 @@ namespace Network.DAL.EFModel
         public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MembersOfConference> MembersOfConference { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MembersOfGroup> MembersOfGroup { get; set; }
         public virtual User_sContact User_sContact { get; set; }
         public virtual User_sPersonalData User_sPersonalData { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Group> Group { get; set; }
+        public virtual ICollection<MembersOfGroup> MembersOfGroup { get; set; }
     }
 }
