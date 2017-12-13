@@ -66,5 +66,11 @@ namespace Network.DAL.Repositories
             return list;
         }
 
+        public IQueryable<MembersOfGroup>  CheckMember(Guid userId, Guid groupId)
+        {
+            var member = _context.MembersOfGroup.Where(x => x.GroupId == groupId && x.MembersId == userId);
+            return member;
+        }
+
     }
 }

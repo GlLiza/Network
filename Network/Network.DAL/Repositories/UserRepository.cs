@@ -40,7 +40,7 @@ namespace Network.DAL.Repositories
 
         public User GetUserByAspUserId(string id)
         {
-            var user = _context.User.FirstOrDefault(s => s.AspUserId == id);
+            var user = _context.User.First(s => s.AspUserId == id);
             return user;
         }
 

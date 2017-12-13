@@ -14,7 +14,12 @@ body {
 
 .content {
     height: 84%;
-    margin-right: 10%;
+
+}
+
+.image {
+    height:200px;
+    width:300px;
 }
 
 

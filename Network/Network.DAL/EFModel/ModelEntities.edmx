@@ -34,7 +34,7 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Information" Type="nvarchar" MaxLength="500" />
           <Property Name="Date" Type="date" />
-          <Property Name="SenderId" Type="uniqueidentifier" />
+          <Property Name="SenderId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -166,11 +166,11 @@
           <Property Name="ImageId" Type="uniqueidentifier" />
           <Property Name="AducationId" Type="uniqueidentifier" />
         </EntityType>
-        <Association Name="FK_Advertisement_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+        <Association Name="FK_Advertisement_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Advertisement">
@@ -372,8 +372,8 @@
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User'sContact" EntityType="Self.User'sContact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User'sPersonalData" EntityType="Self.User'sPersonalData" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Advertisement_User" Association="Self.FK_Advertisement_User">
-            <End Role="User" EntitySet="User" />
+          <AssociationSet Name="FK_Advertisement_AspNetUsers" Association="Self.FK_Advertisement_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Advertisement" EntitySet="Advertisement" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -495,12 +495,7 @@
             <End Role="Conference" EntitySet="Conference" />
             <End Role="MembersOfConference" EntitySet="MembersOfConference" />
           </AssociationSet>
-          <EntitySet Name="Advertisement" EntityType="NetworkContext.Advertisement" />
           <EntitySet Name="User" EntityType="NetworkContext.User" />
-          <AssociationSet Name="FK_Advertisement_User" Association="NetworkContext.FK_Advertisement_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Advertisement" EntitySet="Advertisement" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_AspNetUsers" Association="NetworkContext.FK_User_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="User" EntitySet="User" />
@@ -534,6 +529,11 @@
           <AssociationSet Name="FK_MembersOfGroup_User" Association="NetworkContext.FK_MembersOfGroup_User">
             <End Role="User" EntitySet="User" />
             <End Role="MembersOfGroup" EntitySet="MembersOfGroup" />
+          </AssociationSet>
+          <EntitySet Name="Advertisement" EntityType="NetworkContext.Advertisement" />
+          <AssociationSet Name="FK_Advertisement_AspNetUsers" Association="NetworkContext.FK_Advertisement_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Advertisement" EntitySet="Advertisement" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -600,6 +600,7 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="NetworkContext.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="User" Relationship="NetworkContext.FK_User_AspNetUsers" FromRole="AspNetUsers" ToRole="User" />
           <NavigationProperty Name="AspNetUserRoles" Relationship="NetworkContext.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
+          <NavigationProperty Name="Advertisement" Relationship="NetworkContext.FK_Advertisement_AspNetUsers" FromRole="AspNetUsers" ToRole="Advertisement" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -739,16 +740,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Advertisement">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Information" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="SenderId" Type="Guid" />
-          <NavigationProperty Name="User" Relationship="NetworkContext.FK_Advertisement_User" FromRole="Advertisement" ToRole="User" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -758,25 +749,12 @@
           <Property Name="ContactId" Type="Guid" Nullable="false" />
           <Property Name="Visibility" Type="Boolean" />
           <Property Name="AspUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Advertisement" Relationship="NetworkContext.FK_Advertisement_User" FromRole="User" ToRole="Advertisement" />
           <NavigationProperty Name="AspNetUsers" Relationship="NetworkContext.FK_User_AspNetUsers" FromRole="User" ToRole="AspNetUsers" />
           <NavigationProperty Name="MembersOfConference" Relationship="NetworkContext.FK_MembersOfConference_User" FromRole="User" ToRole="MembersOfConference" />
           <NavigationProperty Name="User_sContact" Relationship="NetworkContext.FK_User_User_sContact" FromRole="User" ToRole="User_sContact" />
           <NavigationProperty Name="User_sPersonalData" Relationship="NetworkContext.FK_User_User_sPersonalData" FromRole="User" ToRole="User_sPersonalData" />
           <NavigationProperty Name="MembersOfGroup" Relationship="NetworkContext.FK_MembersOfGroup_User" FromRole="User" ToRole="MembersOfGroup" />
         </EntityType>
-        <Association Name="FK_Advertisement_User">
-          <End Type="NetworkContext.User" Role="User" Multiplicity="0..1" />
-          <End Type="NetworkContext.Advertisement" Role="Advertisement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Advertisement">
-              <PropertyRef Name="SenderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_AspNetUsers">
           <End Type="NetworkContext.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
           <End Type="NetworkContext.User" Role="User" Multiplicity="*" />
@@ -892,6 +870,28 @@
             </Principal>
             <Dependent Role="MembersOfGroup">
               <PropertyRef Name="MembersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Information" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="SenderId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="NetworkContext.FK_Advertisement_AspNetUsers" FromRole="Advertisement" ToRole="AspNetUsers" />
+        </EntityType>
+        <Association Name="FK_Advertisement_AspNetUsers">
+          <End Type="NetworkContext.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="NetworkContext.Advertisement" Role="Advertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Advertisement">
+              <PropertyRef Name="SenderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1038,16 +1038,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Advertisement">
-            <EntityTypeMapping TypeName="NetworkContext.Advertisement">
-              <MappingFragment StoreEntitySet="Advertisement">
-                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Information" ColumnName="Information" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="NetworkContext.User">
               <MappingFragment StoreEntitySet="User">
@@ -1073,6 +1063,16 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Advertisement">
+            <EntityTypeMapping TypeName="NetworkContext.Advertisement">
+              <MappingFragment StoreEntitySet="Advertisement">
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

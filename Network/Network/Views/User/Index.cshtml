@@ -31,14 +31,9 @@
             {
                 <li id="deleteModal"><a href=#>Мои данные<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
             }
-            @if (User.IsInRole("secretary"))
-            {
+
                 <li><a href="@Url.Action("Index","Group")">Группы<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
-            }
-            @if (User.IsInRole("group_member"))
-            {
-                <li id="addToGroup"><a href="#">Записаться в группу<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon-plus"></span></a></li>
-            }
+            
             @if (User.IsInRole("secretary"))
             {
                 <li><a href="@Url.Action("Index","Conference")">Конференции<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>

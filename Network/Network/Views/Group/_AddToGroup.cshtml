@@ -1,4 +1,5 @@
-﻿@model Network.Views.ViewModels.AddtoGroup
+﻿@model Network.DAL.EFModel.MembersOfGroup
+
 
 <div id="addToGroupDialog">
     <div class="modal-dialog ">
@@ -12,15 +13,20 @@
             <div class="modal-body">
                 @using (Html.BeginForm("AddToGroup", "Group", FormMethod.Post))
                 {
-                    @Html.HiddenFor(model => model.userId)
+                    @Html.HiddenFor(model => model.GroupId)
 
-                    <div class="form-group">
-                        @Html.DropDownListFor(model => model.selectedGroupId, new SelectList(Model.groupList, "Id", "Number"), "Выбери группу")
+                    @*<div class="form-group">
+                        @Html.DropDownListFor(model => model.selectedGroupId, new SelectList(Model.groupList, "Id", "selectedGroupId"), "Выбери группу")
                     </div>
 
-                    <button class="btn btn-info pull-right" type="submit" id="changePhoto">OK</button>
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.selectedSpec, new SelectList(Model.groupList, "Id", "selectedSpec"), "Выбери специализацию")
+                    </div>*@
+
+                    <button class="btn btn-info pull-right" type="submit">OK</button>
                 }
             </div>
         </div>
     </div>
 </div>
+

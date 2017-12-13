@@ -29,7 +29,7 @@
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Information" Type="nvarchar" MaxLength="500" />
     <Property Name="Date" Type="date" />
-    <Property Name="SenderId" Type="uniqueidentifier" />
+    <Property Name="SenderId" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetRoles">
     <Key>
@@ -161,11 +161,11 @@
     <Property Name="ImageId" Type="uniqueidentifier" />
     <Property Name="AducationId" Type="uniqueidentifier" />
   </EntityType>
-  <Association Name="FK_Advertisement_User">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+  <Association Name="FK_Advertisement_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="User">
+      <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Advertisement">
@@ -367,8 +367,8 @@
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User'sContact" EntityType="Self.User'sContact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User'sPersonalData" EntityType="Self.User'sPersonalData" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Advertisement_User" Association="Self.FK_Advertisement_User">
-      <End Role="User" EntitySet="User" />
+    <AssociationSet Name="FK_Advertisement_AspNetUsers" Association="Self.FK_Advertisement_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Advertisement" EntitySet="Advertisement" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">

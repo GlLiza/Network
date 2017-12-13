@@ -17,5 +17,6 @@ namespace Network.DAL.Interfaces
 
         void AddMembers(MembersOfGroup member);
         void DeleteMembers(Guid id);
+        IQueryable<MembersOfGroup> CheckMember(Guid userId, Guid groupId);
     }
 }

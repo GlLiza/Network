@@ -23,7 +23,7 @@ namespace Network.Controllers
         }
 
         // GET: Gro
-        [Authorize(Roles = "secretary")]
+        
         public ActionResult Index()
         {
             List<GroupViewModel> model = new List<GroupViewModel>();
@@ -78,27 +78,53 @@ namespace Network.Controllers
             return RedirectToAction("Index","Group");
         }
 
-        public ActionResult AddToGroup()
+        //public ActionResult AddToGroup()
+        //{
+        //    string idAspNet = User.Identity.GetUserId();
+        //    var user = _userService.GetUserByAspNetId(idAspNet);
+
+        //    var listGroupId = _groupService.GetListOfId();
+        //    var listGroup = _groupService.GetGroupList(listGroupId);
+
+
+        //    AddtoGroup model = new AddtoGroup();
+        //    model.groupList = listGroup;           
+        //    model.userId = user.Id;
+
+        //    return View("_AddToGroup",model);
+        //}
+
+        public ActionResult AddToGroup(Guid id)
         {
-            string idAspNet = User.Identity.GetUserId();
-            var user = _userService.GetUserByAspNetId(idAspNet);
+            MembersOfGroup member = new MembersOfGroup()
+            {
+                GroupId = id
+            };
 
-            var listGroupId = _groupService.GetListOfId();
-            var listGroup = _groupService.GetGroupList(listGroupId);
-          
-
-            AddtoGroup model = new AddtoGroup();
-            model.groupList = listGroup;           
-            model.userId = user.Id;
-
-            return View("_AddToGroup",model);
+            return View("_AddToGroup", member);
         }
 
         [HttpPost]
         [Authorize(Roles = "group_member")]
         public ActionResult AddToGroup(MembersOfGroup member)
         {
-            return RedirectToAction("Index", "User");
+            if (member != null)
+            {
+                var curUser = User.Identity.GetUserId();
+                var user = _userService.GetUserByAspNetId(curUser);
+                member.MembersId = user.Id;
+                var check = _groupService.CheckMemberInGroup(user.Id,member.GroupId);
+                if (check)
+                {
+                                   
+                    _groupService.AddMembersToGroup(member);
+                }
+                
+                return RedirectToAction("Index", "User");
+
+            }
+            else return null;
+
 
         }
 

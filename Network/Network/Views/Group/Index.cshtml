@@ -28,8 +28,11 @@
         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="@Url.Action("Index", "User")"><span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-arrow-left"></span></a></li>
-                <li><a href="@Url.Action("CreateGroup","Group")">Добавить группу<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
-                <li><a href="@Url.Action("Index","Conference")">Найти группу<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+               @if (User.IsInRole("secretary"))
+               {
+                <li><a href="@Url.Action("CreateGroup", "Group")">Добавить группу<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+               }
+                <li><a href="@Url.Action("Index", "Conference")">Найти группу<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
                
             </ul>
         </div>
@@ -60,6 +63,7 @@
         <div class="row">
             @foreach (var item in Model)
             {
+                @Html.HiddenFor(modelItem=>item.Id)
                 <div class="row">
                     <div class="col-md-2">
                     @Html.DisplayFor(modelItem => item.Number)
@@ -77,32 +81,18 @@
                         <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Участники", "Group", "Group", new { groupId = item.Id}, null)</li>
-                            <li>@Html.ActionLink("Удалить", "Group", "Group", new { id = item.Id}, null)</li>
+                        @if (User.IsInRole("group_member"))
+                        {
+                            <li>@Html.ActionLink("Присоединиться к группе", "AddToGroup", "Group", new { id = item.Id }, null)</li>
+
+                            @*<li><a href="@Url.Action("AddToGroup", "Group", new { id=item.Id})">Присоединиться к группе<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>*@
+                        }
+                        @if (User.IsInRole("secretary"))
+                        {
+                            <li>@Html.ActionLink("Удалить", "Group", "Group", new { id = item.Id }, null)</li>
+                        }
                         </ul>
                     </div>
-
-
-                        @*@if (item.Image.Length != 0)
-            {
-                <div class="col-lg-6">
-                    <img class="image" src="data:image/png;base64, @Convert.ToBase64String(item.Image)" />
-                </div>
-            }
-            <div class="col-md-5">
-                <a href="@Url.Action("UsersPage", "Users", new { id = item.Id }, null)" class="nameFirstname">
-                    @Html.DisplayFor(modelItem => item.Name)
-                    @Html.DisplayFor(modelItem => item.Firstname)
-                </a>
-            </div>
-            @*<div class="col-md-1 btn-group">
-                    <button class="btn">...</button>
-                    <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Accept", "AcceptRequest", "Friendship", new { requestsId = item.Requests.Id }, null)</li>
-                        <li>@Html.ActionLink("Ignore", "IgnoreRequest", "Friendship", new { id = item.Requests.Id }, null)</li>
-                        <li>@Html.ActionLink("Rejectr", "RejectrRequest", "Friendship", new { id = item.Requests.Id }, null)</li>
-                    </ul>
-                </div>*@
                     </div>
                 <hr />
             }
@@ -111,3 +101,33 @@
 </div>
 
 
+
+
+
+@*@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+
+            $("#addToGr").click(function () {
+
+                $.ajax({
+                url: '@Url.Action("AddTogroup", "Group")',
+                type: 'POST',
+                data: {
+                    'Id': item.Id
+                },
+                dataType: "json",
+                success: function (response) {
+                    $('#selectMod').modal('hide');
+                    debugger;
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                debugger;
+                $('#selectMod').modal('hide');
+                }
+            });
+            })
+
+        });
+        </script>
+    }*@

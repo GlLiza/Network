@@ -17,8 +17,8 @@ namespace Network.DAL.EFModel
         public System.Guid Id { get; set; }
         public string Information { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<System.Guid> SenderId { get; set; }
+        public string SenderId { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

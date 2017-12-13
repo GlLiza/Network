@@ -249,6 +249,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <EmbeddedResource Include="Content\Pictures\bg.jpg" />
+    <Content Include="Content\Image.css" />
     <Content Include="Content\register.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -322,11 +323,13 @@
     <Content Include="Views\User\UsersPage.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Group\CreateGroup.cshtml" />
+    <Content Include="Views\User\_UserList.cshtml" />
+    <Content Include="Views\Advertisement\_AddAdvertisement.cshtml" />
+    <Content Include="Views\Advertisement\Index.cshtml" />
     <Content Include="Views\Group\_AddToGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Advertisement\" />
     <Folder Include="Views\Conference\" />
   </ItemGroup>
   <ItemGroup>

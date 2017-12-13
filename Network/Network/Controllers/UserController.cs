@@ -22,8 +22,10 @@ namespace Network.Controllers
         [Authorize]
         public ActionResult Index()
         {
+
             return View();
         }
+
 
 
         public ActionResult AddUser(string id)
@@ -102,8 +104,51 @@ namespace Network.Controllers
         }
 
 
+        public ActionResult GetLead()
+        {
+            List<UserListViewModel> model = new List<UserListViewModel>();
+            var listIdsUsers = _userService.GetAllLeadListId();
+
+            var data = _userService.GetDataForListOfUserByAspId(listIdsUsers);
+            foreach (var item in data)
+            {
+                UserListViewModel user = new UserListViewModel();
+                user.Id = item.Id;
+                user.Name = item.Name;
+                user.Image = _userService.GetImageByDataId(item.Id);
+
+                model.Add(user);
+            }
 
 
-        
+            return View("BrowseUser",model);
+        }
+
+        public ActionResult GetMemberGroup()
+        {
+            List<UserListViewModel> model = new List<UserListViewModel>();
+            var listIdsUsers = _userService.GetAllMemberListId();
+            var data = _userService.GetDataForListOfUserByAspId(listIdsUsers);
+            foreach (var item in data)
+            {
+                UserListViewModel user = new UserListViewModel();
+                user.Id = item.Id;
+                user.Name = item.Name;
+                user.Image = _userService.GetImageByDataId(item.Id);
+
+                model.Add(user);
+            }
+
+            return View("BrowseUser", model);
+        }
+
+        //public List<UserListViewModel> AllUser()
+        //{
+        //    return null;
+        //}
+
+
+
+
     }
 }

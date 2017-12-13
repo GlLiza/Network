@@ -113,6 +113,8 @@ D:\University\Diploma\projects\Network\Network\bin\ru\Microsoft.Owin.Security.Tw
 D:\University\Diploma\projects\Network\Network\bin\ru\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 D:\University\Diploma\projects\Network\Network\obj\Debug\Network.dll
 D:\University\Diploma\projects\Network\Network\obj\Debug\Network.pdb
+D:\University\Diploma\Git\Network\Network\obj\Debug\Network.csprojResolveAssemblyReference.cache
+D:\University\Diploma\Git\Network\Network\obj\Debug\Network.csproj.CoreCompileInputs.cache
 D:\University\Diploma\Git\Network\Network\bin\ApplicationInsights.config
 D:\University\Diploma\Git\Network\Network\bin\Content\Pictures\background.png
 D:\University\Diploma\Git\Network\Network\bin\Network.dll.config
@@ -224,7 +226,5 @@ D:\University\Diploma\Git\Network\Network\bin\ru\Microsoft.Owin.Security.Faceboo
 D:\University\Diploma\Git\Network\Network\bin\ru\Microsoft.Owin.Security.Google.resources.dll
 D:\University\Diploma\Git\Network\Network\bin\ru\Microsoft.Owin.Security.Twitter.resources.dll
 D:\University\Diploma\Git\Network\Network\bin\ru\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-D:\University\Diploma\Git\Network\Network\obj\Debug\Network.csprojResolveAssemblyReference.cache
-D:\University\Diploma\Git\Network\Network\obj\Debug\Network.csproj.CoreCompileInputs.cache
 D:\University\Diploma\Git\Network\Network\obj\Debug\Network.dll
 D:\University\Diploma\Git\Network\Network\obj\Debug\Network.pdb

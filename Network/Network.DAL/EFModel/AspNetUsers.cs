@@ -21,6 +21,7 @@ namespace Network.DAL.EFModel
             this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
             this.User = new HashSet<User>();
             this.AspNetUserRoles = new HashSet<AspNetUserRoles>();
+            this.Advertisement = new HashSet<Advertisement>();
         }
     
         public string Id { get; set; }
@@ -44,5 +45,7 @@ namespace Network.DAL.EFModel
         public virtual ICollection<User> User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Advertisement> Advertisement { get; set; }
     }
 }

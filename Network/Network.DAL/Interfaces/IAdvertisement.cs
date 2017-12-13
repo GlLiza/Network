@@ -1,5 +1,6 @@
 ﻿using Network.DAL.EFModel;
 using System;
+using System.Linq;
 
 namespace Network.DAL.Interfaces
 {
@@ -9,5 +10,7 @@ namespace Network.DAL.Interfaces
         void DeleteAdvertisement(Guid id);
         void UpdateAdvertisement(Advertisement id);
         Advertisement Find(Guid id);
+
+        IQueryable<Guid> GetAdvertisement();
     }
 }

@@ -94,6 +94,22 @@ namespace Network.BL.WebServices
 
         }
 
+        public IQueryable<string> GetAllLeadListId()
+        {
+            var list = _userRepository.GetAllLeadId();
+            if (list != null)
+                return list;
+            else return null;
+        }
+
+        public IQueryable<string> GetAllMemberListId()
+        {
+            var list = _userRepository.GetAllMemberId();
+            if (list != null)
+                return list;
+            else return null;
+        }
+
         public User_sPersonalData GetDataByAspUserId(string id)
         {
             if (id != null)

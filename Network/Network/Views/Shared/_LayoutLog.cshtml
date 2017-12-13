@@ -20,6 +20,7 @@
         <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
     </footer>
 
+        @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)

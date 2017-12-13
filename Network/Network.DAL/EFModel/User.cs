@@ -17,7 +17,6 @@ namespace Network.DAL.EFModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Advertisement = new HashSet<Advertisement>();
             this.MembersOfConference = new HashSet<MembersOfConference>();
             this.MembersOfGroup = new HashSet<MembersOfGroup>();
         }
@@ -28,8 +27,6 @@ namespace Network.DAL.EFModel
         public Nullable<bool> Visibility { get; set; }
         public string AspUserId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Advertisement> Advertisement { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MembersOfConference> MembersOfConference { get; set; }

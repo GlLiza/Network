@@ -118,5 +118,13 @@ namespace Network.BL.WebServices
             return null;
         }
 
+        public bool CheckMemberInGroup(Guid userId, Guid groupId)
+        {
+            var members = _groupRepository.CheckMember(userId, groupId);
+                if (members != null)
+                    return false;
+                else return true;
+        }
+
     }
 }

@@ -24,9 +24,7 @@
         <EntityTypeShape EntityType="NetworkContext.Conference" Width="1.5" PointX="0.625" PointY="6.125" />
         <EntityTypeShape EntityType="NetworkContext.MembersOfConference" Width="1.5" PointX="1.625" PointY="2.375" />
         <AssociationConnector Association="NetworkContext.FK_MembersOfConference_Conference" />
-        <EntityTypeShape EntityType="NetworkContext.Advertisement" Width="1.5" PointX="15.75" PointY="3.75" />
         <EntityTypeShape EntityType="NetworkContext.User" Width="1.5" PointX="4.25" PointY="3.375" />
-        <AssociationConnector Association="NetworkContext.FK_Advertisement_User" />
         <AssociationConnector Association="NetworkContext.FK_User_AspNetUsers" />
         <AssociationConnector Association="NetworkContext.FK_MembersOfConference_User" />
         <AssociationConnector Association="NetworkContext.FK_User_User_sContact" />
@@ -37,6 +35,8 @@
         <AssociationConnector Association="NetworkContext.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="NetworkContext.FK_Group_User1" />
         <AssociationConnector Association="NetworkContext.FK_MembersOfGroup_User" />
+        <EntityTypeShape EntityType="NetworkContext.Advertisement" Width="1.5" PointX="13.5" PointY="19.75" />
+        <AssociationConnector Association="NetworkContext.FK_Advertisement_AspNetUsers" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
