@@ -250,6 +250,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <EmbeddedResource Include="Content\Pictures\bg.jpg" />
     <Content Include="Content\Image.css" />
+    <Content Include="Content\Modal.css" />
     <Content Include="Content\register.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -269,6 +270,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\registr.js" />
     <Content Include="Scripts\respond.js" />
@@ -327,6 +329,7 @@
     <Content Include="Views\Advertisement\_AddAdvertisement.cshtml" />
     <Content Include="Views\Advertisement\Index.cshtml" />
     <Content Include="Views\Group\_AddToGroup.cshtml" />
+    <Content Include="Views\Advertisement\_GetListAdvertisement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -77,30 +77,13 @@ namespace Network.Controllers
             }
             return RedirectToAction("Index","Group");
         }
-
-        //public ActionResult AddToGroup()
-        //{
-        //    string idAspNet = User.Identity.GetUserId();
-        //    var user = _userService.GetUserByAspNetId(idAspNet);
-
-        //    var listGroupId = _groupService.GetListOfId();
-        //    var listGroup = _groupService.GetGroupList(listGroupId);
-
-
-        //    AddtoGroup model = new AddtoGroup();
-        //    model.groupList = listGroup;           
-        //    model.userId = user.Id;
-
-        //    return View("_AddToGroup",model);
-        //}
-
+        
         public ActionResult AddToGroup(Guid id)
         {
             MembersOfGroup member = new MembersOfGroup()
             {
                 GroupId = id
             };
-
             return View("_AddToGroup", member);
         }
 
@@ -120,7 +103,7 @@ namespace Network.Controllers
                     _groupService.AddMembersToGroup(member);
                 }
                 
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Index", "Group");
 
             }
             else return null;

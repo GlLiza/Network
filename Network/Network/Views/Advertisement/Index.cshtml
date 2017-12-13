@@ -30,36 +30,42 @@
                 <li><a href="@Url.Action("Index", "User")"><span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-arrow-left"></span></a></li>
                 @if (User.IsInRole("secretary"))
                 {
-                    <li>@Html.ActionLink("Добавить объявление", "Add", "Advertisement")</li>
-                    @*<li lass="active" id="addAdv"><a href="@Url.Action("Add", "Advertisement")">Добавить объявление<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-plus"></span></a></li>*@
+                    <li id="addAdvModal"><a href="#">Добавить объявление<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-plus"></span></a></li>
                 }
-                
+
             </ul>
+
         </div>
     </div>
 </nav>
 
-@*<div id="addAdvModal" class="modal fade" data-url='@Url.Action("Add", "Advertisement", FormMethod.Post)'>
+<div class="container">
+    @*<div class="jumbotron">*@
+        @{Html.RenderPartial("_GetListAdvertisement");}
+        @*</div>*@
+ </div>
+
+
+<div id="addMod" class="modal fade" data-url='@Url.Action("Add", "Advertisement",null)'>
     <div id="addContainer">
     </div>
-</div>*@
+</div>
 
 
-@*@section Scripts{
+@section Scripts{
     <script type="text/javascript">
-        $(function() {
-            $('#addAdv').click(function () {
-                var url = $('#addAdvModal').data('url');
+        $(function () {
+            $('#addAdvModal').click(function () {
+                var url = $('#addMod').data('url');
 
                 $.get(url,
                     function (data) {
                         $('#addContainer').html(data);
 
-                        $('#addAdvModal').modal('show');
+                        $('#addMod').modal('show');
                     });
+
             });
         })
-    </script>
-
-    <script src="@Url.Content("~/Scripts/IncreaseImg.js")"></script>
-}*@
+</script>
+}

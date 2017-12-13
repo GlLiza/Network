@@ -13,6 +13,8 @@ body {
 }
 
 .content {
+    margin-left:8%;
+    margin-right:7%;
     height: 84%;
 
 }
@@ -228,12 +230,12 @@ td .alb {
     display: inline-block;
 }
 
-#editDialog > .modal-dialog .modal-content {
+/*#addToGroupDialog > .modal-dialog .modal-content {
     height: 180px;
     width: 380px;
-}
+}*/
 
-#addPhotoDialog > .modal-dialog .modal-content {
+#addToGroupDialog > .modal-dialog .modal-content {
     height: 180px;
     width: 380px;
 }
@@ -282,7 +284,7 @@ footer {
 
 .container {
     height: 100%;
-    padding: 10px 0;
+    padding: 25px ;
 }
 
 .scrolAlb {

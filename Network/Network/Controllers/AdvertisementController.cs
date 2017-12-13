@@ -25,8 +25,6 @@ namespace Network.Controllers
         public ActionResult Add()
         {
             var senderAspId = User.Identity.GetUserId();
-            //var sender = _userService.GetUserByAspNetId(senderAspId);
-
             Advertisement adv = new Advertisement() { };
             adv.SenderId = senderAspId;
             return View("_AddAdvertisement", adv);
@@ -41,6 +39,11 @@ namespace Network.Controllers
             }
             
             return RedirectToAction("Index", "Advertisement");
+        }
+
+        public ActionResult GetAllAdvertisment()
+        {
+            return View("_GetListAdvertisement");
         }
 
     }

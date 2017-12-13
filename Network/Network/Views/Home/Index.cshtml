@@ -10,3 +10,11 @@
     </div>
 }
 
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container body-content">
+        <div class="row"> <h2>О нас</h2> </div>
+        <div class="row"> <h3>Данное приложение предназначенно, для организации межвузовского взаимодествия.</h3></div>
+    </div>
+}
+

@@ -22,6 +22,7 @@ namespace Network
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/AddUser.js",
                       "~/Scripts/registr.js",
+                      "~/Scripts/Modal.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -29,6 +30,7 @@ namespace Network
                       "~/Scripts/Image.css",
                       "~/Scripts/AddUser.css",
                       "~/Content/register.css",
+                        "~/Content/Modal.css",
                       "~/Content/site.css"));
         }
     }

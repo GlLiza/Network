@@ -83,16 +83,22 @@
                             <li>@Html.ActionLink("Участники", "Group", "Group", new { groupId = item.Id}, null)</li>
                         @if (User.IsInRole("group_member"))
                         {
-                            <li>@Html.ActionLink("Присоединиться к группе", "AddToGroup", "Group", new { id = item.Id }, null)</li>
-                            
+                            <li id="joinToGroup"><a href="#">Присоединиться к группе<span style="font-size: 16px;"></span></a></li>
                         }
+
                         @if (User.IsInRole("secretary"))
                         {
                             <li>@Html.ActionLink("Удалить", "Group", "Group", new { id = item.Id }, null)</li>
                         }
                         </ul>
+                    </div>                 
+
                     </div>
+                    <div id="joinMod" class="modal fade" data-url='@Url.Action("AddToGroup", "Group",new { id=item.Id})'>
+                        <div id="joinContainer">
+                        </div>
                     </div>
+
                 <hr />
             }
         </div>
@@ -103,30 +109,22 @@
 
 
 
-@*@section Scripts{
+
+
+@section Scripts{
     <script type="text/javascript">
         $(function () {
+            $('#joinToGroup').click(function () {
+                var url = $('#joinMod').data('url');
 
-            $("#addToGr").click(function () {
+                $.get(url,
+                    function (data) {
+                        $('#joinContainer').html(data);
 
-                $.ajax({
-                url: '@Url.Action("AddTogroup", "Group")',
-                type: 'POST',
-                data: {
-                    'Id': item.Id
-                },
-                dataType: "json",
-                success: function (response) {
-                    $('#selectMod').modal('hide');
-                    debugger;
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                debugger;
-                $('#selectMod').modal('hide');
-                }
+                        $('#joinMod').modal('show');
+                    });
+
             });
-            })
-
-        });
-        </script>
-    }*@
+        })
+    </script>
+}
