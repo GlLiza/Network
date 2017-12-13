@@ -10,7 +10,8 @@
             </div>
             <div class="modal-body">
                 @using (Html.BeginForm("Add", "Advertisement", FormMethod.Post, null))
-                {                
+                { 
+                    @Html.HiddenFor(model=>model.SenderId)
 
                     <div class="row">
                         <div class="col-md-4">

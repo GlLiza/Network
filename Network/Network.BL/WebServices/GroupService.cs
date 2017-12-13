@@ -121,7 +121,7 @@ namespace Network.BL.WebServices
         public bool CheckMemberInGroup(Guid userId, Guid groupId)
         {
             var members = _groupRepository.CheckMember(userId, groupId);
-                if (members != null)
+                if (members.Count()!=0)
                     return false;
                 else return true;
         }

@@ -29,7 +29,7 @@ namespace Network.Controllers
 
             Advertisement adv = new Advertisement() { };
             adv.SenderId = senderAspId;
-            return PartialView("_AddAdvertisement", adv);
+            return View("_AddAdvertisement", adv);
         }
 
         [HttpPost]

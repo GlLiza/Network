@@ -84,8 +84,7 @@
                         @if (User.IsInRole("group_member"))
                         {
                             <li>@Html.ActionLink("Присоединиться к группе", "AddToGroup", "Group", new { id = item.Id }, null)</li>
-
-                            @*<li><a href="@Url.Action("AddToGroup", "Group", new { id=item.Id})">Присоединиться к группе<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>*@
+                            
                         }
                         @if (User.IsInRole("secretary"))
                         {

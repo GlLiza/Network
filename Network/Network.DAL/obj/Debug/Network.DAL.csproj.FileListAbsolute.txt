@@ -46,3 +46,4 @@ D:\University\Diploma\Git\Network\Network.DAL\bin\Debug\ru\EntityFramework.SqlSe
 D:\University\Diploma\Git\Network\Network.DAL\obj\Debug\Network.DAL.csproj.CoreCompileInputs.cache
 D:\University\Diploma\Git\Network\Network.DAL\obj\Debug\Network.DAL.dll
 D:\University\Diploma\Git\Network\Network.DAL\obj\Debug\Network.DAL.pdb
+D:\University\Diploma\Git\Network\Network.DAL\obj\Debug\Network.DAL.csprojResolveAssemblyReference.cache
