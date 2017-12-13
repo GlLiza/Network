@@ -52,6 +52,16 @@ namespace Network.BL.WebServices
             }           
         }
 
+        public Group GetGroupById(Guid id)
+        {
+            if (id != null)
+            {
+                var gr = _groupRepository.GetGroupById(id);
+                return gr;
+            }
+            else return null;
+        }
+
         public List<Group> GetGroupsForHead(Guid headId)
         {
             if (headId != null)
@@ -126,5 +136,40 @@ namespace Network.BL.WebServices
                 else return true;
         }
 
+        public List<MembersOfGroup> GetListMembersByListId(IQueryable<Guid> listId)
+        {
+            List<MembersOfGroup> result = new List<MembersOfGroup>();
+            if (listId != null)
+            {
+                foreach (var id in listId)
+                {
+                    var item = _groupRepository.GetMembersById(id);
+                    result.Add(item);
+                }
+            }
+            return result;
+        }
+
+        public void DeleteMembersInGroup(Guid groupId)
+        {
+            if (groupId != null)
+            {
+                List<Guid> lidtMemId = new List<Guid>();
+                var listMembersId = _groupRepository.GetMembersIdByGroup(groupId);
+                if (listMembersId.Count() != 0)
+                {
+                    foreach (var id in listMembersId)
+                    {
+                        var memberId = _groupRepository.GetGroupIdByMembersId(id);
+                        lidtMemId.Add(memberId);
+                    }
+                    foreach (var i in lidtMemId)
+                    {
+                        _groupRepository.DeleteMembers(i);
+                    }
+                    
+                }               
+            }           
+        }
     }
 }

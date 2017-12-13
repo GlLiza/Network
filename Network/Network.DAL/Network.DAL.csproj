@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="Interfaces\IAducation.cs" />
     <Compile Include="Interfaces\IAdvertisement.cs" />
+    <Compile Include="Interfaces\IConference.cs" />
     <Compile Include="Interfaces\IGroup.cs" />
     <Compile Include="Interfaces\IImage.cs" />
     <Compile Include="Interfaces\IUser.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AdvertisementRepository.cs" />
     <Compile Include="Repositories\AducationRepository.cs" />
+    <Compile Include="Repositories\ConferenceRepository.cs" />
     <Compile Include="Repositories\GroupRepository.cs" />
     <Compile Include="Repositories\ImageRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />

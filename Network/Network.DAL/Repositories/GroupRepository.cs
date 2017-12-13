@@ -66,10 +66,22 @@ namespace Network.DAL.Repositories
             return list;
         }
 
+        public MembersOfGroup GetMembersById(Guid id)
+        {
+            var list = _context.MembersOfGroup.FirstOrDefault(x => x.MembersId == id);
+            return list;
+        }
+
         public IQueryable<MembersOfGroup>  CheckMember(Guid userId, Guid groupId)
         {
             var member = _context.MembersOfGroup.Where(x => x.GroupId == groupId && x.MembersId == userId);
             return member;
+        }
+
+        public Guid GetGroupIdByMembersId(Guid membersId)
+        {
+            var member = _context.MembersOfGroup.FirstOrDefault(x => x.MembersId == membersId);
+            return member.Id;
         }
 
     }

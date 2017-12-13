@@ -324,12 +324,14 @@
     <Content Include="Views\User\BrowseUser.cshtml" />
     <Content Include="Views\User\UsersPage.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
-    <Content Include="Views\Group\CreateGroup.cshtml" />
     <Content Include="Views\User\_UserList.cshtml" />
     <Content Include="Views\Advertisement\_AddAdvertisement.cshtml" />
     <Content Include="Views\Advertisement\Index.cshtml" />
     <Content Include="Views\Group\_AddToGroup.cshtml" />
     <Content Include="Views\Advertisement\_GetListAdvertisement.cshtml" />
+    <Content Include="Views\Group\_ListMembersOfGroup.cshtml" />
+    <Content Include="Views\Group\_Delete.cshtml" />
+    <Content Include="Views\Group\_CreateGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

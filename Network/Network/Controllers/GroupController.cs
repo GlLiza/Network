@@ -58,7 +58,7 @@ namespace Network.Controllers
             var leadList = GetLead();
             var model = new CreateGroup();
             model.ListLead = leadList;
-            return View(model);
+            return View("_CreateGroup",model);
         }
 
         [HttpPost]
@@ -113,6 +113,54 @@ namespace Network.Controllers
 
 
 
+        //public bool CheckBeforeAddToGroup(Guid userId, Guid groupId)
+        //{
+        //    var check= _groupService.CheckMemberInGroup(userId,groupId);
+        //    if (check)
+        //    {
+        //        return true;
+        //    }
+        //    else return false;
+
+        //}
+
+
+        public ActionResult ListMembersOfGroup(Guid idGroup)
+        {
+            List<UserListViewModel> model = new List<UserListViewModel>();
+            var listMembersId = _groupService.GetmembersListByGroupId(idGroup);
+            var data = _userService.GetDataForListOfUser(listMembersId);
+
+            foreach (var item in data)
+            {
+                UserListViewModel user = new UserListViewModel();
+                user.Id = item.Id;
+                user.Name = item.Name;
+                user.Image = _userService.GetImageByDataId(item.Id);
+
+                model.Add(user);
+            }
+
+            return View("_ListMembersOfGroup", model);
+        }
+
+
+        [Authorize(Roles = "secretary")]
+        public ActionResult DeleteGroup(Guid id)
+        {
+            var group = _groupService.GetGroupById(id);
+            return View("_Delete", group);
+        }
+        [Authorize(Roles = "secretary")]
+        [HttpPost]
+        public ActionResult DeleteGroup(Group gr)
+        {
+           _groupService.DeleteMembersInGroup(gr.Id);           
+            _groupService.DeleteGroup(gr.Id);            
+            return RedirectToAction("Index","Group");
+        }
+
+      
 
 
 

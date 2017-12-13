@@ -30,9 +30,9 @@
                 <li><a href="@Url.Action("Index", "User")"><span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-arrow-left"></span></a></li>
                @if (User.IsInRole("secretary"))
                {
-                <li><a href="@Url.Action("CreateGroup", "Group")">Добавить группу<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+                <li id="addGroupModal"><a href="#">Добавить группу<span></span></a></li>
                }
-                <li><a href="@Url.Action("Index", "Conference")">Найти группу<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+                @*<li><a href="@Url.Action("Index", "Conference")">Найти группу<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>*@
                
             </ul>
         </div>
@@ -60,49 +60,62 @@
             </div>
             </div>
         <hr />
-        <div class="row">
-            @foreach (var item in Model)
+
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
             {
-                @Html.HiddenFor(modelItem=>item.Id)
-                <div class="row">
-                    <div class="col-md-2">
-                    @Html.DisplayFor(modelItem => item.Number)
-                    </div>
+        @Html.HiddenFor(modelItem => item.Id)
+        <div class="row">
+            <div class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Number)
+            </div>
 
-                    <div class="col-md-4">
-                        @Html.DisplayFor(modelItem => item.Specialization)
-                    </div>
+            <div class="col-md-4">
+                @Html.DisplayFor(modelItem => item.Specialization)
+            </div>
 
-                    <div class="col-md-3">
-                        @Html.DisplayFor(modelItem => item.NameHead)
-                    </div>
+            <div class="col-md-3">
+                @Html.DisplayFor(modelItem => item.NameHead)
+            </div>
 
-                    <div class="col-md-3 btn-group">
-                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Участники", "Group", "Group", new { groupId = item.Id}, null)</li>
-                        @if (User.IsInRole("group_member"))
-                        {
-                            <li id="joinToGroup"><a href="#">Присоединиться к группе<span style="font-size: 16px;"></span></a></li>
-                        }
+            <div class="col-md-3 btn-group">
+                <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
+                <ul class="dropdown-menu">
+                    <li id="listMem"><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
+                    @if (User.IsInRole("group_member"))
+                    {
 
-                        @if (User.IsInRole("secretary"))
-                        {
-                            <li>@Html.ActionLink("Удалить", "Group", "Group", new { id = item.Id }, null)</li>
-                        }
-                        </ul>
-                    </div>                 
+                        <li id="joinToGroup"><a href="#">Присоединиться к группе<span style="font-size: 16px;"></span></a></li>
+                    }
 
-                    </div>
+                    @if (User.IsInRole("secretary"))
+                    {
+                        <li id="deletGroup"><a href="#">Удалить<span style="font-size: 16px;"></span></a></li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+        <div id="listMem" class="modal fade" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id},null)'>
+            <div id="listContainer">
+            </div>
+        </div>
+
                     <div id="joinMod" class="modal fade" data-url='@Url.Action("AddToGroup", "Group",new { id=item.Id})'>
                         <div id="joinContainer">
                         </div>
                     </div>
 
-                <hr />
-            }
-        </div>
-    </div>
+                    <div id="delGroup" class="modal fade" data-url='@Url.Action("DeleteGroup", "Group",new { id=item.Id})'>
+                        <div id="delContainer">
+                        </div>
+                    </div>
+
+                    <hr />
+    }
 </div>
 
 
@@ -110,10 +123,26 @@
 
 
 
+<div id="addGroupModal" class="modal fade" data-url='@Url.Action("CreateGroup", "Group", null)'>
+    <div id="addGroupContainer">
+    </div>
+</div>
 
 @section Scripts{
     <script type="text/javascript">
         $(function () {
+            $('#addGroupModal').click(function () {
+                var url = $('#addGroupModal').data('url');
+
+                $.get(url,
+                    function (data) {
+                        $('#addGroupContainer').html(data);
+
+                        $('#addGroupModal').modal('show');
+                    });
+
+            });
+
             $('#joinToGroup').click(function () {
                 var url = $('#joinMod').data('url');
 
@@ -125,6 +154,31 @@
                     });
 
             });
+
+            $('#listMem').click(function () {
+                var url = $('#listMem').data('url');
+
+                $.get(url,
+                    function (data) {
+                        $('#listContainer').html(data);
+
+                        $('#listMem').modal('show');
+                    });
+
+            });
+
+            $('#deletGroup').click(function () {
+                var url = $('#delGroup').data('url');
+
+                $.get(url,
+                    function (data) {
+                        $('#delContainer').html(data);
+
+                        $('#delGroup').modal('show');
+                    });
+
+            });
         })
     </script>
 }
+

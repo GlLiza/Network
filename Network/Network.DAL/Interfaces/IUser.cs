@@ -9,6 +9,7 @@ namespace Network.DAL.Interfaces
         void AddUser(User item);
         void Update(User item);
         User Find(Guid id);
+
         IQueryable<string> GetListOfIds();
         User GetUserByAspUserId(string id);
         IQueryable<string> GetAllLeadId();
