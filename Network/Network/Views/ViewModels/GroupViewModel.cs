@@ -38,4 +38,12 @@ namespace Network.Views.ViewModels
         public string selectedSpec { get; set; }
         public Guid userId { get; set; }
     }
+
+    public class ConferenceViewModel
+    {
+        public Guid Id { get; set; }
+        public string Thema { get; set; }
+        public DateTime Date { get; set; }
+        public string Place { get; set; }
+    }
 }

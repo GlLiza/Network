@@ -40,74 +40,75 @@
 </nav>
 
 
-<div class="jumbotron container-fluid">
-    <div class="row page" align="center">
-        Группы
-      
+<div class="jumbotron">
+    <div class="container-fluid">
+        <div class="row page" align="center">
+            Группы
+
+        </div>
+        <div class="scrolFriends ">
+            <div class="row ">
+                <div class="col-md-2 bold">
+                    Номер
+                </div>
+
+                <div class="col-md-4 bold">
+                    Специализация
+                </div>
+
+                <div class="col-md-3 bold">
+                    Руководитель
+                </div>
+            </div>
+            <hr />
+
+        </div>
     </div>
-    <div class="scrolFriends ">
-        <div class="row ">
-            <div class="col-md-2 bold">
-                Номер
-            </div>
 
-            <div class="col-md-4 bold">
-               Специализация
-            </div>
-
-            <div class="col-md-3 bold">
-                Руководитель
-            </div>
-            </div>
-        <hr />
-
-    </div>
-</div>
-
-<div class="row">
-    @foreach (var item in Model)
+    <div class="row">
+        @foreach (var item in Model)
             {
-        @Html.HiddenFor(modelItem => item.Id)
-        <div class="row">
-            <div class="col-md-2">
-                @Html.DisplayFor(modelItem => item.Number)
+            @Html.HiddenFor(modelItem => item.Id)
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.Number)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DisplayFor(modelItem => item.Specialization)
+                </div>
+
+                <div class="col-md-3">
+                    @Html.DisplayFor(modelItem => item.NameHead)
+                </div>
+
+                <div class="col-md-3 btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
+                    <ul class="dropdown-menu">
+                        <li id="listMem"><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
+                        @if (User.IsInRole("group_member"))
+                        {
+
+                            <li id="joinToGroup"><a href="#">Присоединиться к группе<span style="font-size: 16px;"></span></a></li>
+                        }
+
+                        @if (User.IsInRole("secretary"))
+                        {
+                            <li id="deletGroup"><a href="#">Удалить<span style="font-size: 16px;"></span></a></li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+            <div id="listMem" class="modal fade" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id},null)'>
+                <div id="listContainer">
+                </div>
             </div>
 
-            <div class="col-md-4">
-                @Html.DisplayFor(modelItem => item.Specialization)
+            <div id="joinMod" class="modal fade" data-url='@Url.Action("AddToGroup", "Group",new { id=item.Id})'>
+                <div id="joinContainer">
+                </div>
             </div>
-
-            <div class="col-md-3">
-                @Html.DisplayFor(modelItem => item.NameHead)
-            </div>
-
-            <div class="col-md-3 btn-group">
-                <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
-                <ul class="dropdown-menu">
-                    <li id="listMem"><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
-                    @if (User.IsInRole("group_member"))
-                    {
-
-                        <li id="joinToGroup"><a href="#">Присоединиться к группе<span style="font-size: 16px;"></span></a></li>
-                    }
-
-                    @if (User.IsInRole("secretary"))
-                    {
-                        <li id="deletGroup"><a href="#">Удалить<span style="font-size: 16px;"></span></a></li>
-                    }
-                </ul>
-            </div>
-
-        </div>
-        <div id="listMem" class="modal fade" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id},null)'>
-            <div id="listContainer">
-            </div>
-        </div>
-
-                    <div id="joinMod" class="modal fade" data-url='@Url.Action("AddToGroup", "Group",new { id=item.Id})'>
-                        <div id="joinContainer">
-                        </div>
-                    </div>
 
                     <div id="delGroup" class="modal fade" data-url='@Url.Action("DeleteGroup", "Group",new { id=item.Id})'>
                         <div id="delContainer">
@@ -115,7 +116,8 @@
                     </div>
 
                     <hr />
-    }
+        }
+    </div>
 </div>
 
 
@@ -123,7 +125,7 @@
 
 
 
-<div id="addGroupModal" class="modal fade" data-url='@Url.Action("CreateGroup", "Group", null)'>
+<div id="addModal" class="modal fade" data-url='@Url.Action("CreateGroup", "Group", null)'>
     <div id="addGroupContainer">
     </div>
 </div>
@@ -132,13 +134,13 @@
     <script type="text/javascript">
         $(function () {
             $('#addGroupModal').click(function () {
-                var url = $('#addGroupModal').data('url');
+                var url = $('#addModal').data('url');
 
                 $.get(url,
                     function (data) {
                         $('#addGroupContainer').html(data);
 
-                        $('#addGroupModal').modal('show');
+                        $('#addModal').modal('show');
                     });
 
             });

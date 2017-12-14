@@ -1,4 +1,7 @@
-﻿using Network.BL.WebServices;
+﻿using Microsoft.AspNet.Identity;
+using Network.BL.WebServices;
+using Network.DAL.EFModel;
+using Network.Views.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +25,67 @@ namespace Network.Controllers
         // GET: Conference
         public ActionResult Index()
         {
-            return View();
+            List<ConferenceViewModel> model = new List<ConferenceViewModel>();
+            var conferListId = _conService.GetConferenceList();
+            if (conferListId != null)
+            {
+                var listConference = _conService.GetConferList(conferListId);
+                foreach (var item in listConference)
+                {
+                    ConferenceViewModel confer = new ConferenceViewModel();
+                    confer.Id = item.Id;
+                    confer.Thema = item.Thema;
+                    confer.Date = Convert.ToDateTime(item.Date);
+                    confer.Place = item.Place;
+                    model.Add(confer);
+                }
+            }
+            return View(model);
         }
 
+        [Authorize(Roles = "secretary")]
         public ActionResult CreateConference()
         {
-            return View();
+            var model = new Conference();
+            return View("_CreateConference",model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "secretary")]
+        public ActionResult CreateConference(Conference model)
+        {
+            if (model != null)
+            {
+                _conService.AddCovference(model);
+            }
+            return RedirectToAction("Index", "Conference");
+        }
+
+
+        public ActionResult JoinConference(Guid id)
+        {
+            MembersOfConference mem = new MembersOfConference()
+            {
+                ConferenceId = id
+            };
+            return View("_JoinConference", mem);
+        }
+
+        [HttpPost]
+        public ActionResult JoinConference(MembersOfConference mem)
+        {
+            var curUser = User.Identity.GetUserId();
+            var user = _userService.GetUserByAspNetId(curUser);
+            mem.UserId = user.Id;
+            var check = _conService.CheckMemberInConference(user.Id, mem.ConferenceId);
+
+            if (check)
+            {
+
+                _conService.AddMembersToConference(mem);
+            }
+
+            return View("Index", "Conference");
         }
     }
 }

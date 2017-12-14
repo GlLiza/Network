@@ -78,6 +78,7 @@ namespace Network.Controllers
             return RedirectToAction("Index","Group");
         }
         
+
         public ActionResult AddToGroup(Guid id)
         {
             MembersOfGroup member = new MembersOfGroup()

@@ -332,10 +332,12 @@
     <Content Include="Views\Group\_ListMembersOfGroup.cshtml" />
     <Content Include="Views\Group\_Delete.cshtml" />
     <Content Include="Views\Group\_CreateGroup.cshtml" />
+    <Content Include="Views\Conference\_CreateConference.cshtml" />
+    <Content Include="Views\Conference\_JoinConference.cshtml" />
+    <Content Include="Views\Conference\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Conference\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

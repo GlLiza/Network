@@ -113,6 +113,7 @@ D:\University\Diploma\projects\Network\Network\bin\ru\Microsoft.Owin.Security.Tw
 D:\University\Diploma\projects\Network\Network\bin\ru\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 D:\University\Diploma\projects\Network\Network\obj\Debug\Network.dll
 D:\University\Diploma\projects\Network\Network\obj\Debug\Network.pdb
+D:\University\Diploma\Git\Network\Network\bin\EntityFramework.xml
 D:\University\Diploma\Git\Network\Network\bin\ApplicationInsights.config
 D:\University\Diploma\Git\Network\Network\bin\Content\Pictures\background.png
 D:\University\Diploma\Git\Network\Network\bin\Network.dll.config
@@ -186,7 +187,6 @@ D:\University\Diploma\Git\Network\Network\bin\System.Web.WebPages.Razor.xml
 D:\University\Diploma\Git\Network\Network\bin\Twilio.xml
 D:\University\Diploma\Git\Network\Network\bin\Unity.Mvc.xml
 D:\University\Diploma\Git\Network\Network\bin\Antlr3.Runtime.pdb
-D:\University\Diploma\Git\Network\Network\bin\EntityFramework.xml
 D:\University\Diploma\Git\Network\Network\bin\EntityFramework.SqlServer.xml
 D:\University\Diploma\Git\Network\Network\bin\Microsoft.AspNet.Identity.Core.xml
 D:\University\Diploma\Git\Network\Network\bin\Microsoft.AspNet.Identity.Owin.xml

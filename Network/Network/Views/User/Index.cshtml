@@ -43,13 +43,12 @@
                 <li><a href="@Url.Action("Index","Conference")">Конференции<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
 
                 <li><a href="@Url.Action("BrowseUser","User")">Пользователи<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+         
 
-          
-
-                    @if (!User.IsInRole("secretary"))
-                        {
-                        <li><a href="@Url.Action("Index","Advertisement")">Редактировать личные данные<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
-                        }
+            @if (!User.IsInRole("secretary"))
+                {
+                <li><a href="@Url.Action("Index","Advertisement")">Редактировать личные данные<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+                }
 
 
 
@@ -57,10 +56,16 @@
             </div>
         </div>
     </nav>
+<div class="container">
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
+    </div>
+    </div>
 
 
 <div id="addMod" class="modal fade" data-url='@Url.Action("AddToGroup", "Group", FormMethod.Post)'>
-    <div id="addContainer">
+    <div id="addContainer">        
     </div>
 </div>
 
