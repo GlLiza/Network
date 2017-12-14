@@ -4,8 +4,6 @@ using Network.DAL.EFModel;
 using Network.Views.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Network.Controllers

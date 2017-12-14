@@ -119,16 +119,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Conference">
-      <EntityTypeMapping TypeName="NetworkContext.Conference">
-        <MappingFragment StoreEntitySet="Conference">
-          <ScalarProperty Name="Place" ColumnName="Place" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Thema" ColumnName="Thema" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="MembersOfConference">
       <EntityTypeMapping TypeName="NetworkContext.MembersOfConference">
         <MappingFragment StoreEntitySet="MembersOfConference">
@@ -172,6 +162,16 @@
           <ScalarProperty Name="SenderId" ColumnName="SenderId" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Information" ColumnName="Information" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conference">
+      <EntityTypeMapping TypeName="NetworkContext.Conference">
+        <MappingFragment StoreEntitySet="Conference">
+          <ScalarProperty Name="Place" ColumnName="Place" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Thema" ColumnName="Thema" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

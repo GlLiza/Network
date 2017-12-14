@@ -87,8 +87,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Thema" Type="nvarchar" MaxLength="500" Nullable="false" />
-    <Property Name="Date" Type="date" />
+    <Property Name="Thema" Type="nvarchar" MaxLength="500" />
+    <Property Name="Date" Type="datetime" />
     <Property Name="Place" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="Group">

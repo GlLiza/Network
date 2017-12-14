@@ -38,12 +38,13 @@
     </div>
 </nav>
 
-<div class="jumbotron">
+<div class="jumbotron container-show">
     <div class="row page" align="center">
         Конференции
-
+        <hr />
     </div>
-  
+
+  @*<div class="container-show ">*@
     <div class="row">
         @foreach (var item in Model)
             {
@@ -51,25 +52,24 @@
             <div class="row">
                 <div class="col-md-9">
                     <p>
-                        @Html.DisplayFor(modelItem => item.Date)
+                        @Html.DisplayFor(modelItem => item.Date.Day).@Html.DisplayFor(modelItem => item.Date.Month).@Html.DisplayFor(modelItem => item.Date.Year)
                     по адресу @Html.DisplayFor(modelItem => item.Place)
-                    состоится конференци на тему @Html.DisplayFor(modelItem => item.Thema)
-            </div>
+                    состоится конференция на тему @Html.DisplayFor(modelItem => item.Thema)
+                </div>
 
-
-
-            <div class="col-md-3 btn-group">
-                <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
-                <ul class="dropdown-menu">
-                    <li id="listMem"><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
-                    @if (User.IsInRole("group_member") || User.IsInRole("team_lead"))
-                    {
-                        <li id="joinToConfer"><a href="#">Принять участие в конференции<span style="font-size: 16px;"></span></a></li>
-                    }
-                </ul>
-            </div>
-
+                <div class="col-md-3 btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
+                    <ul class="dropdown-menu">
+                        <li id="listMem"><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
+                        @if (User.IsInRole("group_member") || User.IsInRole("team_lead"))
+                        {
+                            <li id="joinToConfer"><a href="#">Принять участие в конференции<span style="font-size: 16px;"></span></a></li>
+                        }
+                    </ul>
+                </div>
         </div>
+
+
         <div id="listMemm" class="modal fade" data-url='@Url.Action("ListMembersOfConference", "Conference",new { id=item.Id})'>
             <div id="listContainer">
             </div>
@@ -80,15 +80,16 @@
             </div>
         </div>
         <hr />
-        }
-    </div>
+           }
+       @*</div>*@
+  </div>
 
     <div id="addConferenceModal" class="modal fade" data-url='@Url.Action("CreateConference", "Conference", null)'>
         <div id="addConferenceModal">
         </div>
     </div>
-
-    </div>
+    
+</div>
 
 @section Scripts{
     <script type="text/javascript">

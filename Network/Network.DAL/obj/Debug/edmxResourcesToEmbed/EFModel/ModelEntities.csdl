@@ -52,12 +52,7 @@
       <End Role="Group" EntitySet="Group" />
       <End Role="MembersOfGroup" EntitySet="MembersOfGroup" />
     </AssociationSet>
-    <EntitySet Name="Conference" EntityType="NetworkContext.Conference" />
     <EntitySet Name="MembersOfConference" EntityType="NetworkContext.MembersOfConference" />
-    <AssociationSet Name="FK_MembersOfConference_Conference" Association="NetworkContext.FK_MembersOfConference_Conference">
-      <End Role="Conference" EntitySet="Conference" />
-      <End Role="MembersOfConference" EntitySet="MembersOfConference" />
-    </AssociationSet>
     <EntitySet Name="User" EntityType="NetworkContext.User" />
     <AssociationSet Name="FK_User_AspNetUsers" Association="NetworkContext.FK_User_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -97,6 +92,11 @@
     <AssociationSet Name="FK_Advertisement_AspNetUsers" Association="NetworkContext.FK_Advertisement_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Advertisement" EntitySet="Advertisement" />
+    </AssociationSet>
+    <EntitySet Name="Conference" EntityType="NetworkContext.Conference" />
+    <AssociationSet Name="FK_MembersOfConference_Conference" Association="NetworkContext.FK_MembersOfConference_Conference">
+      <End Role="Conference" EntitySet="Conference" />
+      <End Role="MembersOfConference" EntitySet="MembersOfConference" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="C__MigrationHistory">
@@ -271,16 +271,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Conference">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Guid" Nullable="false" />
-    <Property Name="Thema" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Date" Type="DateTime" Precision="0" />
-    <Property Name="Place" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="MembersOfConference" Relationship="NetworkContext.FK_MembersOfConference_Conference" FromRole="Conference" ToRole="MembersOfConference" />
-  </EntityType>
   <EntityType Name="MembersOfConference">
     <Key>
       <PropertyRef Name="Id" />
@@ -288,21 +278,9 @@
     <Property Name="Id" Type="Guid" Nullable="false" />
     <Property Name="ConferenceId" Type="Guid" Nullable="false" />
     <Property Name="UserId" Type="Guid" Nullable="false" />
-    <NavigationProperty Name="Conference" Relationship="NetworkContext.FK_MembersOfConference_Conference" FromRole="MembersOfConference" ToRole="Conference" />
     <NavigationProperty Name="User" Relationship="NetworkContext.FK_MembersOfConference_User" FromRole="MembersOfConference" ToRole="User" />
+    <NavigationProperty Name="Conference" Relationship="NetworkContext.FK_MembersOfConference_Conference" FromRole="MembersOfConference" ToRole="Conference" />
   </EntityType>
-  <Association Name="FK_MembersOfConference_Conference">
-    <End Type="NetworkContext.Conference" Role="Conference" Multiplicity="1" />
-    <End Type="NetworkContext.MembersOfConference" Role="MembersOfConference" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Conference">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="MembersOfConference">
-        <PropertyRef Name="ConferenceId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
@@ -455,6 +433,28 @@
       </Principal>
       <Dependent Role="Advertisement">
         <PropertyRef Name="SenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Conference">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Thema" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Place" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MembersOfConference" Relationship="NetworkContext.FK_MembersOfConference_Conference" FromRole="Conference" ToRole="MembersOfConference" />
+  </EntityType>
+  <Association Name="FK_MembersOfConference_Conference">
+    <End Type="NetworkContext.Conference" Role="Conference" Multiplicity="1" />
+    <End Type="NetworkContext.MembersOfConference" Role="MembersOfConference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conference">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MembersOfConference">
+        <PropertyRef Name="ConferenceId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -38,10 +38,15 @@
     </div>
 </nav>
 
-
-<div class="jumbotron">
-    @{Html.RenderPartial("_UserList", Model);}
+@using (Ajax.BeginForm("BrowseUser", new AjaxOptions { UpdateTargetId = "results" }))
+{
+    <div class="jumbotron browse_user">
+        @{Html.RenderPartial("_UserList", Model);}
     </div>
+ }
+
+
+
 
 
 
