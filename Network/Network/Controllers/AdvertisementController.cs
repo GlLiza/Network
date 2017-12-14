@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
 using Network.BL.WebServices;
 using Network.DAL.EFModel;
+using Network.Views.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Network.Controllers
@@ -19,8 +22,20 @@ namespace Network.Controllers
         // GET: Advertisement
         public ActionResult Index()
         {
+            List<AdvertismentViewModel> model = new List<AdvertismentViewModel>();
+            var advList = _advService.GetAllAdvertisment();
+
+                foreach (var item in advList)
+                {
+                AdvertismentViewModel adv = new AdvertismentViewModel();
+                    adv.Id = item.Id;
+                    adv.Information = item.Information;
+                    adv.Date = Convert.ToDateTime(item.Date);
+                    model.Add(adv);
+                }
             return View();
         }
+
 
         public ActionResult Add()
         {

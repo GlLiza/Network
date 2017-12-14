@@ -38,13 +38,14 @@
     </div>
 </nav>
 
-<div class="jumbotron container-show">
-    <div class="row page" align="center">
-        Конференции
-        <hr />
-    </div>
+<div class="row page" align="center">
+    Конференции
+    <hr />
+</div>
 
-  @*<div class="container-show ">*@
+<div class="jumbotron container-show">
+    
+
     <div class="row">
         @foreach (var item in Model)
             {
@@ -81,7 +82,6 @@
         </div>
         <hr />
            }
-       @*</div>*@
   </div>
 
     <div id="addConferenceModal" class="modal fade" data-url='@Url.Action("CreateConference", "Conference", null)'>

@@ -6,7 +6,7 @@
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Добавление  групп</h4>
+                <h4 class="modal-title">Добавление  группы</h4>
             </div>
 
             <div class="modal-body">
@@ -28,9 +28,13 @@
                                 @Html.DropDownListFor(model => model.Head.Id, new SelectList(Model.ListLead, "Id", "Name"), "Выбери руководителя")
                             </div>
                         </div>
-
-                        <button class="btn btn-success btn-lg pull-right" type="submit">Save</button>
-
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-offset-8 col-md-4 ">
+                                    <button class="btn btn-info pull-right" type="submit">OK</button>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 }

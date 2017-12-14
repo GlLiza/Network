@@ -314,7 +314,7 @@ footer {
 
 
 .jumbotron {
-    max-height: 90%;
+    max-height: 75%;
 }
 
 
@@ -540,4 +540,9 @@ Footer*/ #footer {
 .container-show 
 {
     overflow-y: scroll;
+}
+
+#DaTe {
+    height:30px;
+    width:200px;
 }

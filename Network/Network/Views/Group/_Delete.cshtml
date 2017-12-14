@@ -16,8 +16,13 @@
                     <p>Вы действительно хотите удалить группу</p>
                     <p> номер @Html.DisplayFor(model=>model.Number) со специализацией @Html.DisplayFor(model => model.Specialization)?</p>
 
-                        <button class="btn pull-right" type="submit">OK</button>
-                }
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-offset-8 col-md-4 ">
+                                <button type="submit" class="btn btn-info" style="margin: 15px">OK</button>
+                            </div>
+                        </div>
+                    </div>     }
             </div>
         </div>
     </div>

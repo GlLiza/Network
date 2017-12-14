@@ -39,31 +39,29 @@
     </div>
 </nav>
 
+<div class="row page" align="center">
+    Группы
+    
+</div>
 
 <div class="jumbotron">
-    <div class="container-fluid">
-        <div class="row page" align="center">
-            Группы
-
+        <div class="row ">
+        <div class="col-md-2 bold">
+            Номер
         </div>
-        <div class="scrolFriends ">
-            <div class="row ">
-                <div class="col-md-2 bold">
-                    Номер
-                </div>
 
-                <div class="col-md-4 bold">
-                    Специализация
-                </div>
+        <div class="col-md-4 bold">
+            Специализация
+        </div>
 
-                <div class="col-md-3 bold">
-                    Руководитель
-                </div>
-            </div>
-            <hr />
-
+        <div class="col-md-3 bold">
+            Руководитель
         </div>
     </div>
+
+
+        </div>
+<div class="jumbotron container-show">
 
     <div class="row">
         @foreach (var item in Model)
@@ -100,22 +98,22 @@
                 </div>
 
             </div>
-            <div id="listMemm" class="modal fade" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id})'>
-                <div id="listContainer">
+                <div id="listMemm" class="modal fade" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id})'>
+                    <div id="listContainer">
+                    </div>
                 </div>
-            </div>
 
-            <div id="joinMod" class="modal fade" data-url='@Url.Action("AddToGroup", "Group",new { id=item.Id})'>
-                <div id="joinContainer">
+                <div id="joinMod" class="modal fade" data-url='@Url.Action("AddToGroup", "Group",new { id=item.Id})'>
+                    <div id="joinContainer">
+                    </div>
                 </div>
-            </div>
 
-            <div id="delGroup" class="modal fade" data-url='@Url.Action("DeleteGroup", "Group",new { id=item.Id})'>
-                <div id="delContainer">
+                <div id="delGroup" class="modal fade" data-url='@Url.Action("DeleteGroup", "Group",new { id=item.Id})'>
+                    <div id="delContainer">
+                    </div>
                 </div>
-            </div>
 
-                    <hr />
+                <hr />
         }
     </div>
 </div>
@@ -125,62 +123,63 @@
 
 
 
-<div id="addModal" class="modal fade" data-url='@Url.Action("CreateGroup", "Group", null)'>
-    <div id="addGroupContainer">
+
+    <div id="addModal" class="modal fade" data-url='@Url.Action("CreateGroup", "Group", null)'>
+        <div id="addGroupContainer">
+        </div>
     </div>
-</div>
 
-@section Scripts{
-    <script type="text/javascript">
-        $(function () {
-            $('#addGroupModal').click(function () {
-                var url = $('#addModal').data('url');
+    @section Scripts{
+        <script type="text/javascript">
+            $(function () {
+                $('#addGroupModal').click(function () {
+                    var url = $('#addModal').data('url');
 
-                $.get(url,
-                    function (data) {
-                        $('#addGroupContainer').html(data);
+                    $.get(url,
+                        function (data) {
+                            $('#addGroupContainer').html(data);
 
-                        $('#addModal').modal('show');
-                    });
+                            $('#addModal').modal('show');
+                        });
 
-            });
+                });
 
-            $('#joinToGroup').click(function () {
-                var url = $('#joinMod').data('url');
+                $('#joinToGroup').click(function () {
+                    var url = $('#joinMod').data('url');
 
-                $.get(url,
-                    function (data) {
-                        $('#joinContainer').html(data);
+                    $.get(url,
+                        function (data) {
+                            $('#joinContainer').html(data);
 
-                        $('#joinMod').modal('show');
-                    });
+                            $('#joinMod').modal('show');
+                        });
 
-            });
+                });
 
-            $('#listMem').click(function () {
-                var url = $('#listMemm').data('url');
-                debugger;
-                $.get(url,
-                    function (data) {
-                        $('#listContainer').html(data);
+                $('#listMem').click(function () {
+                    var url = $('#listMemm').data('url');
+                    debugger;
+                    $.get(url,
+                        function (data) {
+                            $('#listContainer').html(data);
 
-                        $('#listMemm').modal('show');
-                    });
+                            $('#listMemm').modal('show');
+                        });
 
-            });
+                });
 
-            $('#deletGroup').click(function () {
-                var url = $('#delGroup').data('url');
-                debugger;
-                $.get(url,
-                    function (data) {
-                        $('#delContainer').html(data);
+                $('#deletGroup').click(function () {
+                    var url = $('#delGroup').data('url');
+                    debugger;
+                    $.get(url,
+                        function (data) {
+                            $('#delContainer').html(data);
 
-                        $('#delGroup').modal('show');
-                    });
+                            $('#delGroup').modal('show');
+                        });
 
-            });
-        })
-    </script>
-}
+                });
+            })
+        </script>
+    }
 
