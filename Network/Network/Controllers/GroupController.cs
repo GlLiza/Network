@@ -126,10 +126,10 @@ namespace Network.Controllers
         //}
 
 
-        public ActionResult ListMembersOfGroup(Guid idGroup)
+        public ActionResult ListMembersOfGroup(Guid id)
         {
             List<UserListViewModel> model = new List<UserListViewModel>();
-            var listMembersId = _groupService.GetmembersListByGroupId(idGroup);
+            var listMembersId = _groupService.GetmembersListByGroupId(id);
             var data = _userService.GetDataForListOfUser(listMembersId);
 
             foreach (var item in data)
@@ -142,7 +142,7 @@ namespace Network.Controllers
                 model.Add(user);
             }
 
-            return View("_ListMembersOfGroup", model);
+            return PartialView("_ListMembersOfGroup", model);
         }
 
 

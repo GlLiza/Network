@@ -24,9 +24,40 @@
         @RenderBody()
     </div>
 
-    <footer>
+    @*<footer>
         <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
-    </footer>
+    </footer>*@
+
+    <div id="footer">
+        @*<div class="footer-block">
+            <div class="footer-block-email">
+                <input class="footer-block-email-img" type="text" value="Join Our Newsletter Here"
+                       onfocus="doClear(this)"
+                       onblur="doDefault(this)" />
+                <button>Join</button>
+            </div>
+        </div>*@
+        <div class="footer-text">
+            @*Quisque turpis lorem, vehicula eget rhoncus vel, ultricies ac mauris. Morbi lectus velit, tincidunt congue pharetra eu, varius nec libero. Vivamus justo risus, dignissim ac vestibulum eget, egestas rutrum magna. Etiam malesuada nisi et nisl volutpat tristique.
+            <p></p>
+            <div class="footer-social-img">
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="~/images/fb-bot.png" alt="" />
+                </a>
+            </div>
+            <div class="footer-social-img">
+                <a href="https://twitter.com" target="_blank">
+                    <img src="~/images/tw-bot.png" alt="" />
+                </a>
+            </div>
+            <div class="footer-social-img">
+                <a href="https://ru.wikipedia.org/wiki/RSS" target="_blank">
+                    <img src="~/images/rss-bot.png" alt="" />
+                </a>
+            </div>*@
+            <p class="footer-copyright">Copyright 2012 Footer here</p>
+        </div>
+    </div>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")

@@ -21,6 +21,16 @@ namespace Network.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            //var id = User.Identity.GetUserId();
+            //UserListIndexViewModel model = new UserListIndexViewModel();
+            //model.AspUserId = id;
+            //var user = _userService.GetUserByAspNetId(id);
+            //model.Id = user.Id;
+
+            //var data = _userService.GetDataByAspUserId(id);
+            //model.Name = data.Name;
+            //model.Image = _userService.GetImageByDataId(data.Id);
+            
 
             return View();
         }

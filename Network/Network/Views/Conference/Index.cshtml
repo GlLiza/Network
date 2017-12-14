@@ -70,7 +70,7 @@
             </div>
 
         </div>
-        <div id="listMem" class="modal fade" data-url='@Url.Action("ListMembersOfGroup", "Conference",new { id=item.Id},null)'>
+        <div id="listMemm" class="modal fade" data-url='@Url.Action("ListMembersOfConference", "Conference",new { id=item.Id})'>
             <div id="listContainer">
             </div>
         </div>
@@ -118,13 +118,13 @@
             });
 
             $('#listMem').click(function () {
-                var url = $('#listMem').data('url');
-
+                var url = $('#listMemm').data('url');
+                debugger;
                 $.get(url,
                     function (data) {
                         $('#listContainer').html(data);
 
-                        $('#listMem').modal('show');
+                        $('#listMemm').modal('show');
                     });
 
             });

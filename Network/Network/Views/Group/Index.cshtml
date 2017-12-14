@@ -28,12 +28,12 @@
         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="@Url.Action("Index", "User")"><span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-arrow-left"></span></a></li>
-               @if (User.IsInRole("secretary"))
+               
+                @if (User.IsInRole("secretary"))
                {
                 <li id="addGroupModal"><a href="#">Добавить группу<span></span></a></li>
                }
-                @*<li><a href="@Url.Action("Index", "Conference")">Найти группу<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>*@
-               
+                              
             </ul>
         </div>
     </div>
@@ -100,7 +100,7 @@
                 </div>
 
             </div>
-            <div id="listMem" class="modal fade" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id},null)'>
+            <div id="listMemm" class="modal fade" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id})'>
                 <div id="listContainer">
                 </div>
             </div>
@@ -110,10 +110,10 @@
                 </div>
             </div>
 
-                    <div id="delGroup" class="modal fade" data-url='@Url.Action("DeleteGroup", "Group",new { id=item.Id})'>
-                        <div id="delContainer">
-                        </div>
-                    </div>
+            <div id="delGroup" class="modal fade" data-url='@Url.Action("DeleteGroup", "Group",new { id=item.Id})'>
+                <div id="delContainer">
+                </div>
+            </div>
 
                     <hr />
         }
@@ -158,20 +158,20 @@
             });
 
             $('#listMem').click(function () {
-                var url = $('#listMem').data('url');
-
+                var url = $('#listMemm').data('url');
+                debugger;
                 $.get(url,
                     function (data) {
                         $('#listContainer').html(data);
 
-                        $('#listMem').modal('show');
+                        $('#listMemm').modal('show');
                     });
 
             });
 
             $('#deletGroup').click(function () {
                 var url = $('#delGroup').data('url');
-
+                debugger;
                 $.get(url,
                     function (data) {
                         $('#delContainer').html(data);

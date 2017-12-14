@@ -85,7 +85,26 @@ namespace Network.Controllers
                 _conService.AddMembersToConference(mem);
             }
 
-            return View("Index", "Conference");
+            return RedirectToAction("Index", "Conference");
+        }
+
+        public ActionResult ListMembersOfConference(Guid id)
+        {
+            List<UserListViewModel> model = new List<UserListViewModel>();
+            var listMembersId = _conService.GetMembersListByConferenceId(id);
+            var data = _userService.GetDataForListOfUser(listMembersId);
+
+            foreach (var item in data)
+            {
+                UserListViewModel user = new UserListViewModel();
+                user.Id = item.Id;
+                user.Name = item.Name;
+                user.Image = _userService.GetImageByDataId(item.Id);
+
+                model.Add(user);
+            }
+
+            return PartialView("_ListMembersOfConference", model);
         }
     }
 }
