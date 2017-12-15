@@ -17,6 +17,10 @@ namespace Network.DAL.Interfaces
 
         User_sPersonalData FindData(Guid id);
 
+        string GetRoleId(string userId);
+        string GetRole(string id);
+        
 
-    }
+
+        }
 }

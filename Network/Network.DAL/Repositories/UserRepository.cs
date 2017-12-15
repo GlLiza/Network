@@ -57,5 +57,17 @@ namespace Network.DAL.Repositories
             //var listUser = _context.User.Select(x => x.Id);
             return aspNetUserId;
         }
+
+        public string GetRoleId(string userId)
+        {
+            var roleId = _context.AspNetUserRoles.FirstOrDefault(x => x.UserId == userId).ToString();
+            return roleId;
+        }
+
+        public string GetRole(string id)
+        {
+            var role = _context.AspNetRoles.Find(id);
+            return role.Name;
+        }
     }
 }

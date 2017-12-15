@@ -1,4 +1,5 @@
-﻿
+﻿@model Network.Views.ViewModels.UserIndexViewModel
+    
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -45,32 +46,84 @@
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="col-md-6">
+
+@if (Model != null)
+{
+    <div class="jumbotron">
+        <div class="col-lg-4">
+            @if (Model.Image != null)
+            {
+                <img class="image AVA" src="data:image/png;base64, @Convert.ToBase64String(Model.Image)" />
+            }
+            else
+            {
+                <img class="image AVA" style="border:solid;" src="@Url.Content("~/Content/Pictures/no.jpg")" />
+            }
+
+        </div>
+
+        <div class="row">
+            <div class="page">
+                <div id="userId">@Html.HiddenFor(item=>Model.Id)</div>
+                @Html.DisplayFor(model => model.Name)
+            </div>
+            <hr />
+
+            <div class="menu">
+                <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        
+                         <li id="contact"><a href="#">Контакты<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-phone"></span></a></li>
+                        
+
+                        <li id="aduc"><a href="#">Образование<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
+
+                    @if (User.IsInRole("group_member"))
+                    {
+                        <li id="groupIn"><a href="#">Мои группы<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+                    }
+
+                    @if (User.IsInRole("team_lead"))
+                    {
+                        <li id="groupMy"><a href="#">Мои группы<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+                    }
+                    </ul>
+                </div>
+                </div>
+
+
+        </div>
+
     </div>
-    <div class="col-md-6">
-    </div>
-    </div>
 
-
-<div id="addMod" class="modal fade" data-url='@Url.Action("AddToGroup", "Group", FormMethod.Post)'>
-    <div id="addContainer">        
-    </div>
-</div>
-
-@section Scripts{
-    <script type="text/javascript">
-        $(function () {
-            $('#addToGroup').click(function () {
-                var url = $('#addMod').data('url');
-
-                $.get(url,
-                    function (data) {
-                        $('#addContainer').html(data);
-
-                        $('#addMod').modal('show');
-                    });
-            });
-        })
-</script>
 }
+
+
+
+    @section Scripts{
+        <script type="text/javascript">
+            $(function () {
+                $('#contact').click(function () {
+                    var UserId = $('#userId').val();
+
+                                $.ajax({
+                                    url: '@Url.Action("SelectReceiver", "Messages")',
+                                    type: 'POST',
+                                    data: {
+                                        'receiverId': UserId
+                                    },
+
+                                    dataType: "json",
+                                    success: function(response) {
+                                        $('#selectMod').modal('hide');
+                                        debugger;
+
+                                    },
+                                    error: function(xhr, ajaxOptions, thrownError) {
+                                        debugger;
+                                        $('#selectMod').modal('hide');
+                                    }
+                                });
+    })
+        </script>
+    }

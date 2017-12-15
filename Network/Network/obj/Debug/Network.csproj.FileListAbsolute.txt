@@ -225,6 +225,7 @@ D:\University\Diploma\Git\Network\Network\bin\ru\Microsoft.Owin.Security.Google.
 D:\University\Diploma\Git\Network\Network\bin\ru\Microsoft.Owin.Security.Twitter.resources.dll
 D:\University\Diploma\Git\Network\Network\bin\ru\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 D:\University\Diploma\Git\Network\Network\obj\Debug\Network.csprojResolveAssemblyReference.cache
+D:\University\Diploma\Git\Network\Network\obj\Debug\Network.g.resources
 D:\University\Diploma\Git\Network\Network\obj\Debug\Network.csproj.CoreCompileInputs.cache
 D:\University\Diploma\Git\Network\Network\obj\Debug\Network.dll
 D:\University\Diploma\Git\Network\Network\obj\Debug\Network.pdb

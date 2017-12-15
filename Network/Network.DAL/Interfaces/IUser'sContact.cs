@@ -7,6 +7,6 @@ namespace Network.DAL.Interfaces
     {
         void AddContact(User_sContact contact);
         void Update(User_sContact contact);
-        User_sContact Find(string id);
+        User_sContact Find(Guid id);
     }
 }

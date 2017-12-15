@@ -35,14 +35,13 @@ namespace Network.Views.ViewModels
         public byte[] Image { get; set; }
     }
 
-    public class UserListIndexViewModel
+    public class UserIndexViewModel
     {
         public Guid Id { get; set; }
         public string AspUserId { get; set; }
         public Roles TypeUser { get; set; }
         public string Name { get; set; }
         public byte[] Image { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Skype { get; set; }
+
     }
 }

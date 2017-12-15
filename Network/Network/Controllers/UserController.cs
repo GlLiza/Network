@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
 using Network.BL.WebServices;
 using Network.DAL.EFModel;
+using Network.Enums;
 using Network.Views.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -21,19 +23,23 @@ namespace Network.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            //var id = User.Identity.GetUserId();
-            //UserListIndexViewModel model = new UserListIndexViewModel();
-            //model.AspUserId = id;
-            //var user = _userService.GetUserByAspNetId(id);
-            //model.Id = user.Id;
+            var id = User.Identity.GetUserId();
+            UserIndexViewModel model = new UserIndexViewModel();
+            model.AspUserId = id;
+            var user = _userService.GetUserByAspNetId(id);
+            model.Id = user.Id;
 
-            //var data = _userService.GetDataByAspUserId(id);
-            //model.Name = data.Name;
-            //model.Image = _userService.GetImageByDataId(data.Id);
-            
+            var data = _userService.GetDataByAspUserId(id);
+            model.Name = data.Name;
+            model.Image = _userService.GetImageByDataId(data.Id);
 
-            return View();
+            var type= _userService.GetTypeUser(id);
+            //model.TypeUser = Convert.ToInt32(type);
+
+
+            return View(model);
         }
+
 
 
 
@@ -151,11 +157,12 @@ namespace Network.Controllers
             return View("BrowseUser", model);
         }
 
-        //public List<UserListViewModel> AllUser()
-        //{
-        //    return null;
-        //}
-
+        public ActionResult GetContact(Guid idUser)
+        {
+            var user = _userService.GetUserById(idUser);
+            var contact = _userService.GetContactById(user.ContactId);
+            return PartialView("_ShowContact",contact);
+        }
 
 
 

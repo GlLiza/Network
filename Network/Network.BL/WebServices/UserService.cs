@@ -234,6 +234,26 @@ namespace Network.BL.WebServices
             else return null;
         }
 
+        public string GetTypeUser(string id)
+        {
+            if (id != null)
+            {
+                var roleId = _userRepository.GetRoleId(id);
+                 return roleId;
+            }
+            return null;
+        }
+
+        public User_sContact GetContactById(Guid id)
+        {
+            if (id != null)
+            {
+                var contact = _contactRepository.Find(id);
+                return contact;
+            }
+            else return null;
+        }
+
        
 
 

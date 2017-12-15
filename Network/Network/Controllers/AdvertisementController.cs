@@ -33,7 +33,7 @@ namespace Network.Controllers
                     adv.Date = Convert.ToDateTime(item.Date);
                     model.Add(adv);
                 }
-            return View();
+            return View(model);
         }
 
 

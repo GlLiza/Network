@@ -1,5 +1,6 @@
 ﻿using Network.DAL.Interfaces;
 using Network.DAL.EFModel;
+using System;
 
 namespace Network.DAL.Repositories
 {
@@ -15,7 +16,7 @@ namespace Network.DAL.Repositories
             base.Save();
         }
 
-        public User_sContact Find(string id)
+        public User_sContact Find(Guid id)
         {
             return _context.User_sContact.Find(id);
         }
