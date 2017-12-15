@@ -132,6 +132,7 @@
     @section Scripts{
         <script type="text/javascript">
             document.ready=(function () {
+
                 $('#addGroupModal').click(function () {
                     var url = $('#addModal').data('url');
 
@@ -151,7 +152,6 @@
             })()
             function openModal(element) {
                 var url = $(element).data('url');
-                debugger;
                 $.get(url,
                     function (data) {
                         $('#listContainer').html(data);

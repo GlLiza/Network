@@ -61,22 +61,22 @@
                 <div class="col-md-3 btn-group">
                     <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
                     <ul class="dropdown-menu">
-                        <li id="listMem"><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
+                        <li id="listMem" onclick="opendaModal(this)" data-url='@Url.Action("ListMembersOfConference", "Conference",new { id=item.Id})'><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
                         @if (User.IsInRole("group_member") || User.IsInRole("team_lead"))
                         {
-                            <li id="joinToConfer"><a href="#">Принять участие в конференции<span style="font-size: 16px;"></span></a></li>
+                            <li id="joinToConfer" onclick="joinToConf(this)"data-url='@Url.Action("JoinConference", "Conference",new { id=item.Id})' ><a href="#">Принять участие в конференции<span style="font-size: 16px;"></span></a></li>
                         }
                     </ul>
                 </div>
         </div>
 
 
-        <div id="listMemm" class="modal fade" data-url='@Url.Action("ListMembersOfConference", "Conference",new { id=item.Id})'>
+        <div id="listMemm" class="modal fade">
             <div id="listContainer">
             </div>
         </div>
 
-        <div id="joinMod" class="modal fade" data-url='@Url.Action("JoinConference", "Conference",new { id=item.Id},null)'>
+        <div id="joinMod" class="modal fade" >
             <div id="joinContainer">
             </div>
         </div>
@@ -93,7 +93,9 @@
 
 @section Scripts{
     <script type="text/javascript">
-        $(function () {
+        document.ready = (function () {
+
+
             $('#addConferModal').click(function () {
                 var url = $('#addConferenceModal').data('url');
 
@@ -103,11 +105,11 @@
 
                         $('#addConferenceModal').modal('show');
                     });
-
             });
+        })()
 
-            $('#joinToConfer').click(function () {
-                var url = $('#joinMod').data('url');
+            function joinToConf(element) {
+                var url = $(element).data('url');
 
                 $.get(url,
                     function (data) {
@@ -116,10 +118,10 @@
                         $('#joinMod').modal('show');
                     });
 
-            });
+            };
 
-            $('#listMem').click(function () {
-                var url = $('#listMemm').data('url');
+            function opendaModal (element) {
+                var url = $(element).data('url');
                 debugger;
                 $.get(url,
                     function (data) {
@@ -128,8 +130,7 @@
                         $('#listMemm').modal('show');
                     });
 
-            });
-        })
+            };
     </script>
 }
 
