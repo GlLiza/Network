@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Network.BL.WebServices;
 using Network.DAL.EFModel;
-using Network.Enums;
 using Network.Views.ViewModels;
 using System;
 using System.Collections.Generic;

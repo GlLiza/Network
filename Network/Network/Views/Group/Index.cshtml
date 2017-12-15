@@ -65,7 +65,7 @@
 
     <div class="row">
         @foreach (var item in Model)
-            {
+        {
             @Html.HiddenFor(modelItem => item.Id)
             <div class="row">
                 <div class="col-md-2">
@@ -83,32 +83,32 @@
                 <div class="col-md-3 btn-group">
                     <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
                     <ul class="dropdown-menu">
-                        <li id="listMem"><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
+                        <li id="listMem" onclick="openModal(this)" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id})'><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
                         @if (User.IsInRole("group_member"))
                         {
 
-                            <li id="joinToGroup"><a href="#">Присоединиться к группе<span style="font-size: 16px;"></span></a></li>
+                            <li id="joinToGroup" onclick="joinToGroup(this)" data-url='@Url.Action("AddToGroup", "Group",new { id=item.Id})'><a href="#">Присоединиться к группе<span style="font-size: 16px;"></span></a></li>
                         }
 
                         @if (User.IsInRole("secretary"))
                         {
-                            <li id="deletGroup"><a href="#">Удалить<span style="font-size: 16px;"></span></a></li>
+                            <li id="deletGroup" onclick="deletGroup(this)" data-url='@Url.Action("DeleteGroup", "Group",new { id=item.Id})'><a href="#">Удалить<span style="font-size: 16px;"></span></a></li>
                         }
                     </ul>
                 </div>
 
             </div>
-                <div id="listMemm" class="modal fade" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id})'>
+                <div id="listMemm" class="modal fade" >
                     <div id="listContainer">
                     </div>
                 </div>
 
-                <div id="joinMod" class="modal fade" data-url='@Url.Action("AddToGroup", "Group",new { id=item.Id})'>
+                <div id="joinMod" class="modal fade" >
                     <div id="joinContainer">
                     </div>
                 </div>
 
-                <div id="delGroup" class="modal fade" data-url='@Url.Action("DeleteGroup", "Group",new { id=item.Id})'>
+                <div id="delGroup" class="modal fade" >
                     <div id="delContainer">
                     </div>
                 </div>
@@ -131,7 +131,7 @@
 
     @section Scripts{
         <script type="text/javascript">
-            $(function () {
+            document.ready=(function () {
                 $('#addGroupModal').click(function () {
                     var url = $('#addModal').data('url');
 
@@ -144,42 +144,46 @@
 
                 });
 
-                $('#joinToGroup').click(function () {
-                    var url = $('#joinMod').data('url');
 
-                    $.get(url,
-                        function (data) {
-                            $('#joinContainer').html(data);
+              
 
-                            $('#joinMod').modal('show');
-                        });
 
-                });
+            })()
+            function openModal(element) {
+                var url = $(element).data('url');
+                debugger;
+                $.get(url,
+                    function (data) {
+                        $('#listContainer').html(data);
 
-                $('#listMem').click(function () {
-                    var url = $('#listMemm').data('url');
-                    debugger;
-                    $.get(url,
-                        function (data) {
-                            $('#listContainer').html(data);
+                        $('#listMemm').modal('show');
+                    });
 
-                            $('#listMemm').modal('show');
-                        });
+            };
+            function deletGroup(element) {
+                var url = $(element).data('url');
+                debugger;
+                $.get(url,
+                    function (data) {
+                        $('#delContainer').html(data);
 
-                });
+                        $('#delGroup').modal('show');
+                    });
 
-                $('#deletGroup').click(function () {
-                    var url = $('#delGroup').data('url');
-                    debugger;
-                    $.get(url,
-                        function (data) {
-                            $('#delContainer').html(data);
+            };
 
-                            $('#delGroup').modal('show');
-                        });
 
-                });
-            })
+            function joinToGroup(element) {
+                var url = $(element).data('url');
+
+                $.get(url,
+                    function (data) {
+                        $('#joinContainer').html(data);
+
+                        $('#joinMod').modal('show');
+                    });
+
+            };
         </script>
     }
 
