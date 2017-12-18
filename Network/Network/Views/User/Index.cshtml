@@ -62,8 +62,11 @@
                     <img class="image AVA" style="border:solid;" src="@Url.Content("~/Content/Pictures/no.jpg")" />
                 }
                
-                <button id="edit" class="btn editProf" type="submit">Редактировать профиль</button>
-
+                @*<button  class="btn" id="editProf" type="submit">Редактировать профиль</button>*@
+                <div class="btn">
+                    @Html.ActionLink("Edit","EditUser","User")
+                    </div>
+             
 
             </div>
 
@@ -165,6 +168,18 @@
     }
 }
 
-
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#editProf').click(function () {
+                //debugger;
+                $.ajax({
+                    url: '@Url.Action("EditUser", "User")',
+                    type: 'GET',
+                });
+            });
+        });
+        </script>
+    }
 
 

@@ -22,9 +22,15 @@ namespace Network.Controllers
         [Authorize]        
         public ActionResult Index()
         {
+            var model = GetProfileFromPage();
+            return View(model);
+        }
+
+        protected UserIndexViewModel GetProfileFromPage()
+        {
             var id = User.Identity.GetUserId();
             UserIndexViewModel model = new UserIndexViewModel();
-            model.AspUserId = id;           
+            model.AspUserId = id;
 
             if (!User.IsInRole("secretary"))
             {
@@ -45,7 +51,7 @@ namespace Network.Controllers
                     model.Skype = contact.Skype;
                     model.PhoneNumber = contact.PhoneNumber;
                 }
-              
+
 
                 var aducation = _userService.GetAducationInf(model.Id);
                 if (aducation != null)
@@ -55,17 +61,17 @@ namespace Network.Controllers
                     model.Specialization = aducation.Specialization;
                     model.StartYear = aducation.StartYear;
                     model.GradYear = aducation.GradYear;
-                }          
+                }
+                return model;
 
-                return View(model);
             }
-            return View(model);         
+            return null;
         }
 
 
 
 
-        public ActionResult AddUser(string id)
+       public ActionResult AddUser(string id)
         {
             AddUserViewModel model = new AddUserViewModel()
             {
@@ -116,20 +122,20 @@ namespace Network.Controllers
 
         public ActionResult BrowseUser()
         {
-                List<UserListViewModel> model = new List<UserListViewModel>();
-                var listIdsUsers = _userService.GetAllUsersId();
+                //List<UserListViewModel> model = new List<UserListViewModel>();
+                //var listIdsUsers = _userService.GetAllUsersId();
 
-                var data = _userService.GetDataForListOfUserByAspId(listIdsUsers);
+                //var data = _userService.GetDataForListOfUserByAspId(listIdsUsers);
 
-                foreach (var item in data)
-                {
-                    UserListViewModel user = new UserListViewModel();
-                    user.Id = item.Id;
-                    user.Name = item.Name;
-                    user.Image = _userService.GetImageByDataId(item.Id);
+                //foreach (var item in data)
+                //{
+                //    UserListViewModel user = new UserListViewModel();
+                //    user.Id = item.Id;
+                //    user.Name = item.Name;
+                //    user.Image = _userService.GetImageByDataId(item.Id);
 
-                    model.Add(user);
-                }
+                //    model.Add(user);
+                //}
 
             return View();
         }
@@ -151,7 +157,7 @@ namespace Network.Controllers
 
                 model.Add(user);
             }
-            return PartialView(model);
+            return PartialView("_GetAllUsers",model);
         }
 
         public ActionResult GetLead()
@@ -169,7 +175,7 @@ namespace Network.Controllers
 
                 model.Add(user);
             }
-            return PartialView(model);
+            return PartialView("_GetLead",model);
         }
 
         public ActionResult GetMemberGroup()
@@ -187,7 +193,7 @@ namespace Network.Controllers
                 model.Add(user);
             }
 
-            return PartialView(model);
+            return PartialView("_GetMemberGroup", model);
         }
 
         public ActionResult GetContact(Guid idUser)
@@ -197,5 +203,26 @@ namespace Network.Controllers
             return PartialView("_ShowContact",contact);
         }
 
+        [HttpGet]
+        public ActionResult EditUser()
+        {
+            var model = GetProfileFromPage();
+
+            return View("EditUser",model);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(UserIndexViewModel model)
+        {
+            if (model != null)
+            {
+
+            }
+
+            return View();
+        }
+
     }
 }
+
+

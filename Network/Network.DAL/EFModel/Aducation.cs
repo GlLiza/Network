@@ -11,8 +11,7 @@ namespace Network.DAL.EFModel
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class Aducation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,20 +21,10 @@ namespace Network.DAL.EFModel
         }
     
         public System.Guid Id { get; set; }
-
-        [DisplayName("Образование")]
         public string Type { get; set; }
-
-        [DisplayName("Учреждение получения")]
         public string Institution { get; set; }
-
-        [DisplayName("Специальность")]
         public string Specialization { get; set; }
-
-        [DisplayName("Год начала ")]
         public Nullable<System.DateTime> StartYear { get; set; }
-
-        [DisplayName("Год заверщения")]
         public Nullable<System.DateTime> GradYear { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

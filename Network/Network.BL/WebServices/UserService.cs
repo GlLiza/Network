@@ -264,6 +264,33 @@ namespace Network.BL.WebServices
             return null;
         }
 
+        public void EditProfile(Aducation aducation, Image img, User_sContact contact, User_sPersonalData data, User user)
+        {
+            if (aducation != null)
+            {
+
+            }
+            if (img != null)
+            {
+
+            }
+            if (contact != null)
+            {
+
+            }
+
+            if (data != null)
+            {
+
+            }
+
+            if (user != null)
+            {
+
+            }
+
+        }
+
        
 
 

@@ -31,7 +31,7 @@
                 <li><a href="@Url.Action("Index", "User")"><span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-arrow-left"></span></a></li>
                 @if (User.IsInRole("secretary"))
                 {
-                    <li id="addAdvModal"><a href="#">Добавить объявление<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+                <li id="addAdvModal"><a href="#">Добавить объявление<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
                 }
 
             </ul>
@@ -47,50 +47,52 @@
 
 <div class="jumbotron container-show">
     <div class="row">
-@foreach (var item in Model)
-{
-    @Html.HiddenFor(modelItem => item.Id)
-    <div class="row">
-        <div class="col-md-9">
-            <p>
-                @Html.DisplayFor(modelItem => item.Information)
-        </div>
 
-        <div class="col-md-3">
-            <p>
-                @Html.DisplayFor(modelItem => item.Date)
-        </div>
+        @foreach (var item in Model)
+        {
+            @Html.HiddenFor(modelItem => item.Id)
+            <div class="row">
+                <div class="col-md-9">
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Information)
+                </div>
+
+                <div class="col-md-3">
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Date)
+                </div>
 
 
 
-       
+
+            </div>
+
+            <hr />
+        }
     </div>
+</div>
 
-    <hr />
-    }
-        </div>
+
+<div id="addMod" class="modal fade" data-url='@Url.Action("Add", "Advertisement",null)'>
+    <div id="addContainer">
     </div>
-
-    <div id="addMod" class="modal fade" data-url='@Url.Action("Add", "Advertisement",null)'>
-        <div id="addContainer">
-        </div>
-    </div>
+</div>
 
 
-    @section Scripts{
-        <script type="text/javascript">
-            $(function () {
-                $('#addAdvModal').click(function () {
-                    var url = $('#addMod').data('url');
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#addAdvModal').click(function () {
+                var url = $('#addMod').data('url');
 
-                    $.get(url,
-                        function (data) {
-                            $('#addContainer').html(data);
+                $.get(url,
+                    function (data) {
+                        $('#addContainer').html(data);
 
-                            $('#addMod').modal('show');
-                        });
+                        $('#addMod').modal('show');
+                    });
 
-                });
-            })
-        </script>
-    }
+            });
+        })
+    </script>
+}

@@ -255,6 +255,10 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Views\User\_ShowContact.cshtml" />
+    <Content Include="Views\User\EditUser.cshtml" />
+    <Content Include="Views\User\_GetLead.cshtml" />
+    <Content Include="Views\User\_GetAllUsers.cshtml" />
+    <Content Include="Views\User\_GetMemberGroup.cshtml" />
     <Resource Include="Content\Pictures\no.png" />
     <Content Include="Content\register.css" />
     <Content Include="favicon.ico" />

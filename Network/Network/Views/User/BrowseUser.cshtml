@@ -29,58 +29,33 @@
         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="@Url.Action("Index", "User")"><span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-arrow-left"></span></a></li>
-                <li><a href="@Url.Action("BrowseUser", "User")">Все пользователи<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
-                <li><a href="@Url.Action("GetLead", "User")">Руководители групп<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
-                <li><a href="@Url.Action("GetMemberGroup", "User")">Участники групп<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
-              
+
+                <li onclick="brows('@Url.Action("GetAllUsers", "User")')"><a href="#">Все пользователи<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+                <li onclick="brows('@Url.Action("GetLead", "User")')"><a href="#">Руководители<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+                <li onclick="brows('@Url.Action("GetMemberGroup", "User")')"><a href="#">Пользователи<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+
+                @*<li><a href="@Url.Action("GetLead", "User")">Руководители групп<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+                    <li><a href="@Url.Action("GetMemberGroup", "User")">Участники групп<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>*@
+
             </ul>
         </div>
     </div>
 </nav>
 
-<div>
 
-@using (Ajax.BeginForm("GetAllUsers", new AjaxOptions { UpdateTargetId = "result" }))
-{
 
-}
-    <div id="result"></div>
-    </div>
-
-@*@using (Html.BeginForm())
-{
-    <div>
-        @Html.DropDownList("selectedRole", new SelectList(
-       new[] {"Все пользователи"}.Concat(Enum.GetNames(typeof(Roles)))))
-        <button type="submit">Вывести</button>
+        <div class="jumbotron  container-show">
+            <div id="result">
+            </div>
         </div>
-}*@
 
 
-    @*<div class="jumbotron  container-show">
-
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="row">
-                    @if (item.Image.Length != 0)
-                    {
-                        <div class="col-lg-6">
-                            <img class="image" src="data:image/png;base64, @Convert.ToBase64String(item.Image)" />
-                        </div>
-                    }
-                    <div class="col-md-5">
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </div>
-                </div>
-                <hr />
-                }
-        </div>
-    </div>*@
-
-
-
-
-
-
-
+        <script>
+            function brows(url) {
+                debugger;
+                $.get(url,
+                    function (data) {
+                        $('#result').html(data);
+                    });
+            }
+        </script>
