@@ -7,6 +7,6 @@ namespace Network.DAL.Interfaces
     {
         void AddAducation(Aducation aducation);
         void UpdateAducation(Aducation aducation);
-        Aducation Find(Guid id);
+        Aducation Find(Guid ?id);
     }
 }

@@ -16,7 +16,6 @@
       <EntityTypeMapping TypeName="NetworkContext.User_sContact">
         <MappingFragment StoreEntitySet="User'sContact">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="Skype" ColumnName="Skype" />
         </MappingFragment>
@@ -29,19 +28,6 @@
           <ScalarProperty Name="Model" ColumnName="Model" />
           <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
           <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Aducation">
-      <EntityTypeMapping TypeName="NetworkContext.Aducation">
-        <MappingFragment StoreEntitySet="Aducation">
-          <ScalarProperty Name="StartGraduet" ColumnName="StartGraduet" />
-          <ScalarProperty Name="StartYear" ColumnName="StartYear" />
-          <ScalarProperty Name="Specialization" ColumnName="Specialization" />
-          <ScalarProperty Name="Institution" ColumnName="Institution" />
-          <ScalarProperty Name="Form" ColumnName="Form" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -172,6 +158,18 @@
           <ScalarProperty Name="Place" ColumnName="Place" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Thema" ColumnName="Thema" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Aducation">
+      <EntityTypeMapping TypeName="NetworkContext.Aducation">
+        <MappingFragment StoreEntitySet="Aducation">
+          <ScalarProperty Name="GradYear" ColumnName="GradYear" />
+          <ScalarProperty Name="StartYear" ColumnName="StartYear" />
+          <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+          <ScalarProperty Name="Institution" ColumnName="Institution" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -19,24 +19,47 @@ namespace Network.Controllers
         }
 
         // GET: User
-        [Authorize]
+        [Authorize]        
         public ActionResult Index()
         {
             var id = User.Identity.GetUserId();
             UserIndexViewModel model = new UserIndexViewModel();
-            model.AspUserId = id;
-            var user = _userService.GetUserByAspNetId(id);
-            model.Id = user.Id;
+            model.AspUserId = id;           
 
-            var data = _userService.GetDataByAspUserId(id);
-            model.Name = data.Name;
-            model.Image = _userService.GetImageByDataId(data.Id);
+            if (!User.IsInRole("secretary"))
+            {
+                var user = _userService.GetUserByAspNetId(id);
+                model.Id = user.Id;
 
-            var type= _userService.GetTypeUser(id);
-            //model.TypeUser = Convert.ToInt32(type);
+                var data = _userService.GetDataByAspUserId(id);
+                if (data != null)
+                {
+                    model.Name = data.Name;
+                    model.Image = _userService.GetImageByDataId(data.Id);
 
+                }
 
-            return View(model);
+                var contact = _userService.GetContactById(data.Id);
+                if (contact != null)
+                {
+                    model.Skype = contact.Skype;
+                    model.PhoneNumber = contact.PhoneNumber;
+                }
+              
+
+                var aducation = _userService.GetAducationInf(model.Id);
+                if (aducation != null)
+                {
+                    model.Type = aducation.Type;
+                    model.Institution = aducation.Institution;
+                    model.Specialization = aducation.Specialization;
+                    model.StartYear = aducation.StartYear;
+                    model.GradYear = aducation.GradYear;
+                }          
+
+                return View(model);
+            }
+            return View(model);         
         }
 
 
@@ -73,7 +96,6 @@ namespace Network.Controllers
 
                 User_sContact contact = new User_sContact()
                 {
-                    Email = User.Identity.Name,
                     PhoneNumber = model.PhoneNumber,
                     Skype = model.Skype
                 };
@@ -84,12 +106,8 @@ namespace Network.Controllers
                     PersonalDataId = data.Id,
                     ContactId = contact.Id,
                     Visibility = true,
-                   // Type = Convert.ToString(model.TypeUser),
                     AspUserId = model.AspUserId
                 };
-               // UserManager//AddToRole(model.AspUserId, model.TypeUser.ToString());
-
-
                 _userService.AddUser(user);
             }
             return View("DisplayEmail");
@@ -98,8 +116,29 @@ namespace Network.Controllers
 
         public ActionResult BrowseUser()
         {
+                List<UserListViewModel> model = new List<UserListViewModel>();
+                var listIdsUsers = _userService.GetAllUsersId();
+
+                var data = _userService.GetDataForListOfUserByAspId(listIdsUsers);
+
+                foreach (var item in data)
+                {
+                    UserListViewModel user = new UserListViewModel();
+                    user.Id = item.Id;
+                    user.Name = item.Name;
+                    user.Image = _userService.GetImageByDataId(item.Id);
+
+                    model.Add(user);
+                }
+
+            return View();
+        }
+
+
+        public ActionResult GetAllUsers()
+        {
             List<UserListViewModel> model = new List<UserListViewModel>();
-            var listIdsUsers = _userService.GetUsersIdWithoutCurrent(User.Identity.GetUserId());
+            var listIdsUsers = _userService.GetAllUsersId();
 
             var data = _userService.GetDataForListOfUserByAspId(listIdsUsers);
 
@@ -112,11 +151,8 @@ namespace Network.Controllers
 
                 model.Add(user);
             }
-
-
-            return View(model);
+            return PartialView(model);
         }
-
 
         public ActionResult GetLead()
         {
@@ -133,9 +169,7 @@ namespace Network.Controllers
 
                 model.Add(user);
             }
-
-
-            return View("BrowseUser",model);
+            return PartialView(model);
         }
 
         public ActionResult GetMemberGroup()
@@ -153,7 +187,7 @@ namespace Network.Controllers
                 model.Add(user);
             }
 
-            return View("BrowseUser", model);
+            return PartialView(model);
         }
 
         public ActionResult GetContact(Guid idUser)
@@ -162,8 +196,6 @@ namespace Network.Controllers
             var contact = _userService.GetContactById(user.ContactId);
             return PartialView("_ShowContact",contact);
         }
-
-
 
     }
 }

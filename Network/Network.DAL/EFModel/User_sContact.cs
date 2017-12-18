@@ -11,7 +11,8 @@ namespace Network.DAL.EFModel
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class User_sContact
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +22,10 @@ namespace Network.DAL.EFModel
         }
     
         public System.Guid Id { get; set; }
-        public string Email { get; set; }
+
+        [DisplayName("Телефон")]
         public string PhoneNumber { get; set; }
+
         public string Skype { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

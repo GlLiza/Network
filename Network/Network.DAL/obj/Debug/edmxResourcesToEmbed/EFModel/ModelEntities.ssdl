@@ -16,11 +16,10 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Type" Type="nvarchar" MaxLength="100" />
-    <Property Name="Form" Type="nvarchar" MaxLength="100" />
     <Property Name="Institution" Type="nvarchar" MaxLength="500" />
     <Property Name="Specialization" Type="nvarchar" MaxLength="500" />
     <Property Name="StartYear" Type="date" />
-    <Property Name="StartGraduet" Type="date" />
+    <Property Name="GradYear" Type="date" />
   </EntityType>
   <EntityType Name="Advertisement">
     <Key>
@@ -148,7 +147,6 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Email" Type="nvarchar" MaxLength="100" />
     <Property Name="PhoneNumber" Type="nvarchar" MaxLength="250" />
     <Property Name="Skype" Type="nvarchar" MaxLength="100" />
   </EntityType>

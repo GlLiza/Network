@@ -26,11 +26,11 @@ namespace Network.DAL.EFModel
         public Nullable<System.Guid> ImageId { get; set; }
         public Nullable<System.Guid> AducationId { get; set; }
     
-        public virtual Aducation Aducation { get; set; }
         public virtual Image Image { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Group> Group { get; set; }
+        public virtual Aducation Aducation { get; set; }
     }
 }

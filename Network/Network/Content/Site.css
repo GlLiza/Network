@@ -24,9 +24,10 @@ body {
     width:300px;
 }
 
-
-
-
+.editProf {
+    margin-left:65px;
+    margin-bottom:15px;
+}
 #regContainer {
     margin-top: 3%;
 }
@@ -176,6 +177,11 @@ td {
 .page {
     color: #000;
     font-size: 36px;
+    font-weight: bold;
+}
+.pageText {
+    color: #000;
+    font-size: 22px;
     font-weight: bold;
 }
 

@@ -81,17 +81,11 @@ namespace Network.BL.WebServices
             return imageData;
         }
 
-        public IQueryable<string> GetUsersIdWithoutCurrent(string id)
+        public IQueryable<string> GetAllUsersId()
         {
-
-            if (id != null)
-            {
-                var list = _userRepository.GetListOfIds();
-                var res=list.Where(f=>f!=id);
-                return res;
-            }
-            return null;
-
+            var list = _userRepository.GetListOfIds();
+            return list;
+          
         }
 
         public IQueryable<string> GetAllLeadListId()
@@ -252,6 +246,22 @@ namespace Network.BL.WebServices
                 return contact;
             }
             else return null;
+        }
+
+        public Aducation GetAducationInf(Guid id)
+        {
+            var user = GetUserById(id);
+            if (user != null)
+            {
+                var persData = _persDataRepository.Find(user.PersonalDataId);
+                if (persData.AducationId != null)
+                {
+                    var aducation = _aducationRepository.Find(persData.AducationId);
+                    return aducation;
+                }               
+              
+            }
+            return null;
         }
 
        

@@ -108,7 +108,11 @@ namespace Network.Controllers
 
             }
             else return null;
-
+        }
+        public bool CheckMember(Guid idMem,Guid idGro)
+        {
+            var res = _groupService.CheckMemberInGroup(idMem,idGro);
+            return res;
 
         }
 

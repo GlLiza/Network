@@ -252,6 +252,8 @@
     <EmbeddedResource Include="Content\Pictures\bg.jpg" />
     <Content Include="Content\Image.css" />
     <Content Include="Content\Modal.css" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Views\User\_ShowContact.cshtml" />
     <Resource Include="Content\Pictures\no.png" />
     <Content Include="Content\register.css" />

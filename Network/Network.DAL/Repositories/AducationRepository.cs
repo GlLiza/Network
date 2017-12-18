@@ -15,7 +15,7 @@ namespace Network.DAL.Repositories
             base.Save();
         }
 
-        public Aducation Find(Guid id)
+        public Aducation Find(Guid ?id)
         {
             return _context.Aducation.Find(id);
         }

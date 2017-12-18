@@ -28,7 +28,6 @@ namespace Network.DAL.EFModel
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User_sContact> User_sContact { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<Aducation> Aducation { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
@@ -42,5 +41,6 @@ namespace Network.DAL.EFModel
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<Advertisement> Advertisement { get; set; }
         public virtual DbSet<Conference> Conference { get; set; }
+        public virtual DbSet<Aducation> Aducation { get; set; }
     }
 }

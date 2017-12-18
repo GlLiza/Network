@@ -1,5 +1,6 @@
 ﻿using Network.Enums;
 using System;
+using System.ComponentModel;
 using System.Web;
 
 namespace Network.Views.ViewModels
@@ -16,14 +17,6 @@ namespace Network.Views.ViewModels
 
         public string Name { get; set; }
         public HttpPostedFileBase Image { get; set; }
-
-        //public string TypeAducation { get; set; }
-        //public string FormAducation { get; set; }
-        //public string Institution { get; set; }
-        //public string Specialization { get; set; }
-        //public int YearBegin { get; set; }
-        //public int YearGraduation { get; set; }
-
         public string PhoneNumber { get; set; }
         public string Skype { get; set; }
     }
@@ -39,9 +32,26 @@ namespace Network.Views.ViewModels
     {
         public Guid Id { get; set; }
         public string AspUserId { get; set; }
-        public Roles TypeUser { get; set; }
         public string Name { get; set; }
         public byte[] Image { get; set; }
+
+        [DisplayName("Номер телефона")]
+        public string PhoneNumber { get; set; }
+        public string Skype { get; set; }
+
+        [DisplayName("Образование")]
+        public string Type { get; set; }
+
+        [DisplayName("Учреждение")]
+        public string Institution { get; set; }
+
+        [DisplayName("Специальность")]
+        public string Specialization { get; set; }
+
+        [DisplayName("Год начала")]
+        public Nullable<System.DateTime> StartYear { get; set; }
+        [DisplayName("Год окончания")]
+        public Nullable<System.DateTime> GradYear { get; set; }
 
     }
 }

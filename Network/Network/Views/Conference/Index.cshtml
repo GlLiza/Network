@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Network.Views.ViewModels.ConferenceViewModel>
+@using Network.Controllers
 
 @{
     ViewBag.Title = "Index";
@@ -63,12 +64,12 @@
                     <ul class="dropdown-menu">
                         <li id="listMem" onclick="opendaModal(this)" data-url='@Url.Action("ListMembersOfConference", "Conference",new { id=item.Id})'><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
                         @if (User.IsInRole("group_member") || User.IsInRole("team_lead"))
-                        {
+                        { 
                             <li id="joinToConfer" onclick="joinToConf(this)"data-url='@Url.Action("JoinConference", "Conference",new { id=item.Id})' ><a href="#">Принять участие в конференции<span style="font-size: 16px;"></span></a></li>
                         }
                     </ul>
                 </div>
-        </div>
+             </div>
 
 
         <div id="listMemm" class="modal fade">
@@ -82,7 +83,7 @@
         </div>
         <hr />
            }
-  </div>
+          </div>
 
     <div id="addConferenceModal" class="modal fade" data-url='@Url.Action("CreateConference", "Conference", null)'>
         <div id="addConferenceModal">
@@ -122,7 +123,6 @@
 
             function opendaModal (element) {
                 var url = $(element).data('url');
-                debugger;
                 $.get(url,
                     function (data) {
                         $('#listContainer').html(data);

@@ -86,7 +86,7 @@
                         <li id="listMem" onclick="openModal(this)" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id})'><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
                         @if (User.IsInRole("group_member"))
                         {
-
+                            
                             <li id="joinToGroup" onclick="joinToGroup(this)" data-url='@Url.Action("AddToGroup", "Group",new { id=item.Id})'><a href="#">Присоединиться к группе<span style="font-size: 16px;"></span></a></li>
                         }
 
@@ -124,7 +124,7 @@
 
 
 
-    <div id="addModal" class="modal fade" data-url='@Url.Action("CreateGroup", "Group", null)'>
+    <div id="addModal" class="modal fade" data-url='@Url.Action("GetContact", "Group", null)'>
         <div id="addGroupContainer">
         </div>
     </div>
@@ -143,13 +143,10 @@
                             $('#addModal').modal('show');
                         });
 
-                });
-
-
-              
-
-
+                });          
             })()
+
+
             function openModal(element) {
                 var url = $(element).data('url');
                 $.get(url,
