@@ -45,7 +45,7 @@ namespace Network.Controllers
 
                 }
 
-                var contact = _userService.GetContactById(data.Id);
+                var contact = _userService.GetContactById(user.ContactId);
                 if (contact != null)
                 {
                     model.Skype = contact.Skype;
@@ -122,21 +122,6 @@ namespace Network.Controllers
 
         public ActionResult BrowseUser()
         {
-                //List<UserListViewModel> model = new List<UserListViewModel>();
-                //var listIdsUsers = _userService.GetAllUsersId();
-
-                //var data = _userService.GetDataForListOfUserByAspId(listIdsUsers);
-
-                //foreach (var item in data)
-                //{
-                //    UserListViewModel user = new UserListViewModel();
-                //    user.Id = item.Id;
-                //    user.Name = item.Name;
-                //    user.Image = _userService.GetImageByDataId(item.Id);
-
-                //    model.Add(user);
-                //}
-
             return View();
         }
 
@@ -216,10 +201,32 @@ namespace Network.Controllers
         {
             if (model != null)
             {
+                Aducation aducation = new Aducation() {
+                    Type = model.Type,
+                    Institution = model.Specialization,
+                    StartYear = model.StartYear,
+                    GradYear = model.GradYear,
+                    Specialization = model.Specialization
+                };
+                User_sContact contact = new User_sContact() {
+                    PhoneNumber = model.PhoneNumber,
+                    Skype = model.Skype
+                };
+                User_sPersonalData data = new User_sPersonalData()
+                {
+                    Name = model.Name
+                };
+                User user = new User()
+                {
+                    AspUserId = model.AspUserId,
+                    Id = model.Id
+                };
 
+                _userService.EditProfile(aducation, contact, data, user);
+                return RedirectToAction("Index","User");
             }
 
-            return View();
+            return RedirectToAction("Index", "User");
         }
 
     }

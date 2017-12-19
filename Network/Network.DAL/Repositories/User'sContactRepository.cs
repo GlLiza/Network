@@ -23,6 +23,8 @@ namespace Network.DAL.Repositories
 
         public void Update(User_sContact contact)
         {
+            //_context.User_sContact.Attach(contact);
+            //_context.Entry(contact).State = System.Data.Entity.EntityState.Modified;
             var cont = _context.User_sContact.Find(contact.Id);
             _context.Entry(cont).CurrentValues.SetValues(contact);
             base.Save();

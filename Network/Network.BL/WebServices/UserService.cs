@@ -240,6 +240,7 @@ namespace Network.BL.WebServices
 
         public User_sContact GetContactById(Guid id)
         {
+            
             if (id != null)
             {
                 var contact = _contactRepository.Find(id);
@@ -264,30 +265,49 @@ namespace Network.BL.WebServices
             return null;
         }
 
-        public void EditProfile(Aducation aducation, Image img, User_sContact contact, User_sPersonalData data, User user)
+        public void EditProfile(Aducation aducation, User_sContact contact, User_sPersonalData data, User user)
         {
-            if (aducation != null)
-            {
-
-            }
-            if (img != null)
-            {
-
-            }
-            if (contact != null)
-            {
-
-            }
-
-            if (data != null)
-            {
-
-            }
-
             if (user != null)
             {
+                var us = GetUserById(user.Id);
+                var persData = GetUserPersData(us.PersonalDataId);
+                var cont = GetContactById(us.ContactId);
 
+                if (cont.Id != null)
+                {
+                    contact.Id = cont.Id;
+                    _contactRepository.Update(contact);
+                }
+                else {
+                    contact.Id = Guid.NewGuid();
+                    _contactRepository.AddContact(contact);
+                    us.ContactId = contact.Id;
+                }
+
+
+
+                if (persData.AducationId != null)
+                {
+                    aducation.Id = (Guid)persData.AducationId;
+                    _aducationRepository.UpdateAducation(aducation);
+                }
+                else {
+                    aducation.Id = Guid.NewGuid();
+                    _aducationRepository.AddAducation(aducation);
+                    persData.AducationId = aducation.Id;
+                }
+
+                data.Id = persData.Id;
+                data.ImageId = persData.ImageId;
+                data.AducationId = aducation.Id;
+                _persDataRepository.Update(data);
+
+                user.Id = us.Id;
+                user.PersonalDataId = data.Id;
+                user.ContactId = contact.Id;
+                _userRepository.Update(user);           
             }
+                       
 
         }
 

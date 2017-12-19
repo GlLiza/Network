@@ -12,9 +12,7 @@
 
     public enum TypeAducation
     {
-        Full=1,
-        Extramural, //заочная
-
-
+        Высшее=1,
+        Незаконченное_высшее //заочная
     }
 }

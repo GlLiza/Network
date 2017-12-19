@@ -556,3 +556,10 @@ Footer*/ #footer {
 .AVA{
     margin:25px;
 }
+
+.btn-edit {
+    padding-left:25px;
+    margin-left:110px;
+    width:100px;
+    color:black;
+}

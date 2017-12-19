@@ -1,6 +1,7 @@
 ﻿using Network.Enums;
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Web;
 
 namespace Network.Views.ViewModels
@@ -32,25 +33,34 @@ namespace Network.Views.ViewModels
     {
         public Guid Id { get; set; }
         public string AspUserId { get; set; }
+
+        [DisplayName("Имя и фамилия")]
+        [RegularExpression(@"[a-zA-Zа-яёА-ЯЁ\s\-]+$", ErrorMessage = "Некорректные данные")]
         public string Name { get; set; }
         public byte[] Image { get; set; }
 
         [DisplayName("Номер телефона")]
+        [RegularExpression(@"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Некорректный номер телефона")]
         public string PhoneNumber { get; set; }
         public string Skype { get; set; }
 
         [DisplayName("Образование")]
+        [RegularExpression(@"[a-zA-Zа-яёА-ЯЁ\s\-]+$", ErrorMessage = "Некорректные данные")]
         public string Type { get; set; }
 
         [DisplayName("Учреждение")]
+        [RegularExpression(@"[a-zA-Zа-яёА-ЯЁ\s\-]+$", ErrorMessage = "Некорректные данные")]
         public string Institution { get; set; }
 
         [DisplayName("Специальность")]
+        [RegularExpression(@"[a-zA-Zа-яёА-ЯЁ\s\-]+$", ErrorMessage = "Некорректные данные")]
         public string Specialization { get; set; }
 
         [DisplayName("Год начала")]
+        [Range(1700, 2017, ErrorMessage = "Недопустимый год")]
         public Nullable<System.DateTime> StartYear { get; set; }
         [DisplayName("Год окончания")]
+        [Range(1700, 2018, ErrorMessage = "Недопустимый год")]
         public Nullable<System.DateTime> GradYear { get; set; }
 
     }
