@@ -67,7 +67,7 @@
                     <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
                     <ul class="dropdown-menu">
                         <li id="listMem" onclick="opendaModal(this)" data-url='@Url.Action("ListMembersOfConference", "Conference",new { id=item.Id})'><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
-                        @if (User.IsInRole("group_member") || User.IsInRole("team_lead"))
+                        @if (!User.IsInRole("secretary") && item.MembersStatus!=false)
                         { 
                             <li id="joinToConfer" onclick="joinToConf(this)"data-url='@Url.Action("JoinConference", "Conference",new { id=item.Id})' ><a href="#">Принять участие в конференции<span style="font-size: 16px;"></span></a></li>
                         }

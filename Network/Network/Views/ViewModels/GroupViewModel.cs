@@ -53,15 +53,6 @@ namespace Network.Views.ViewModels
         public string Thema { get; set; }
         public DateTime Date { get; set; }
         public string Place { get; set; }
-    }
-
-    public class JoinToConferenceViewModel
-    {
-        public Guid Id { get; set; }
-        public Guid ConferenceId { get; set; }
-        public Guid UserId { get; set; }
-
-        List<MembersOfConference> membership { get; set; }
-
-    }
+        public bool MembersStatus { get; set; }
+    }    
 }

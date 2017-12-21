@@ -23,6 +23,9 @@ namespace Network.Controllers
         // GET: Conference
         public ActionResult Index()
         {
+            var idString = User.Identity.GetUserId();
+            var id = _userService.GetUserIdByAspId(idString);
+
             List<ConferenceViewModel> model = new List<ConferenceViewModel>();
             var conferListId = _conService.GetConferenceList();
             if (conferListId != null)
@@ -35,6 +38,7 @@ namespace Network.Controllers
                     confer.Thema = item.Thema;
                     confer.Date = Convert.ToDateTime(item.Date);
                     confer.Place = item.Place;
+                    confer.MembersStatus =_conService.CheckMemberInConference(id,item.Id);
                     model.Add(confer);
                 }
             }
