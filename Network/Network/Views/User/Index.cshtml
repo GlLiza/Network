@@ -134,7 +134,8 @@
 
                             <div class="row">
                                 @Html.DisplayNameFor(model => model.StartYear)
-                                @Html.DisplayFor(model => model.StartYear)
+                                @Html.DisplayFor(model => model.StartYear.Value.Day).@Html.DisplayFor(model => model.StartYear.Value.Month).@Html.DisplayFor(model => model.StartYear.Value.Year)
+                               
                             </div>
                         } 
 
@@ -142,7 +143,9 @@
                         {
                             <div class="row">
                                 @Html.DisplayNameFor(model => model.GradYear)
-                                @Html.DisplayFor(model => model.GradYear)
+                               @Html.DisplayFor(model => model.GradYear.Value.Day).@Html.DisplayFor(model => model.GradYear.Value.Month).@Html.DisplayFor(model => model.GradYear.Value.Year)
+
+
                             </div>
                         } 
 

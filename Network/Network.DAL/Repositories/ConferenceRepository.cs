@@ -79,5 +79,17 @@ namespace Network.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+        
+        public IQueryable<Guid> GetConferIdList(Guid memberId)
+        {
+            var confIds = _context.MembersOfConference.Where(x => x.UserId == memberId).Select(x => x.ConferenceId);
+            return confIds;
+        }
+
+        public MembersOfConference GetMembership(Guid confId, Guid membId)
+        {
+            var item = _context.MembersOfConference.SingleOrDefault(x=>x.UserId==membId && x.ConferenceId==confId);
+            return item;
+        }
     }
 }

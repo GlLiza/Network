@@ -259,6 +259,8 @@
     <Content Include="Views\User\_GetLead.cshtml" />
     <Content Include="Views\User\_GetAllUsers.cshtml" />
     <Content Include="Views\User\_GetMemberGroup.cshtml" />
+    <Content Include="Views\Conference\GetListConferenceForUser.cshtml" />
+    <Content Include="Views\Conference\_LeaveConference.cshtml" />
     <Resource Include="Content\Pictures\no.png" />
     <Content Include="Content\register.css" />
     <Content Include="favicon.ico" />

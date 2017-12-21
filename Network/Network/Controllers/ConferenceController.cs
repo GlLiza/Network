@@ -104,5 +104,49 @@ namespace Network.Controllers
 
             return PartialView("_ListMembersOfConference", model);
         }
+
+        [HttpGet]
+        public ActionResult GetListConferenceForUser()
+        {
+            var idString = User.Identity.GetUserId();
+            var id = _userService.GetUserIdByAspId(idString);
+            var listIdOfConfer = _conService.ListConferIdsByMemberId(id);
+            var conference = _conService.GetConferList(listIdOfConfer);
+
+            List<ConferenceViewModel> model = new List<ConferenceViewModel>();
+
+            foreach (var item in conference)
+            {
+                ConferenceViewModel confer = new ConferenceViewModel();
+                confer.Id = item.Id;
+                confer.Thema = item.Thema;
+                confer.Date = Convert.ToDateTime(item.Date);
+                confer.Place = item.Place;
+                model.Add(confer);
+            }
+
+
+            return View(model);
+        }
+
+        public ActionResult LeaveConference(Guid ConferenceId)
+        {
+            var idString = User.Identity.GetUserId();
+            var idMem = _userService.GetUserIdByAspId(idString);
+
+            var membership = _conService.GetMembership(ConferenceId, idMem);
+            
+            return View("_LeaveConference", membership);
+        }
+
+        [HttpPost]
+        public ActionResult LeaveConference(MembersOfConference mem)
+        {
+            _conService.RemoveMembers(mem);
+
+            return RedirectToAction("GetListConferenceForUser", "Conference");
+        }
+
+
     }
 }

@@ -228,6 +228,16 @@ namespace Network.BL.WebServices
             else return null;
         }
 
+        public Guid GetUserIdByAspId(string id)
+        {
+            if (id != null)
+            {
+                var user = _userRepository.GetUserByAspUserId(id);
+                return user.Id;
+            }
+            else return Guid.Empty;
+        }
+
         public string GetTypeUser(string id)
         {
             if (id != null)

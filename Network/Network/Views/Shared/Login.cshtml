@@ -43,6 +43,9 @@
                                             <div class="form-group text-center">
                                                 <a href="@Url.Action("ForgotPassword","Account")" class="to_register"> Забыли пароль?</a>
                                             </div>
+
+                                            @Html.ValidationSummary("", new { @class = "text-danger" })
+
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">

@@ -563,3 +563,7 @@ Footer*/ #footer {
     width:100px;
     color:black;
 }
+
+ a:focus {
+    color: #f1eeee;
+}

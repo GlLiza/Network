@@ -1,6 +1,7 @@
 ﻿using Network.DAL.EFModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -25,9 +26,16 @@ namespace Network.Views.ViewModels
 
     public class CreateGroup
     {
+        [Required]
         public int Number { get; set; }
+
+        [Required]
         public string Specialization { get; set; }
+
+        [Required]
         public SelectLeadViewModel Head { get; set; }
+
+        [Required]
         public List<SelectLeadViewModel> ListLead { get; set; }
     }
 
@@ -45,5 +53,15 @@ namespace Network.Views.ViewModels
         public string Thema { get; set; }
         public DateTime Date { get; set; }
         public string Place { get; set; }
+    }
+
+    public class JoinToConferenceViewModel
+    {
+        public Guid Id { get; set; }
+        public Guid ConferenceId { get; set; }
+        public Guid UserId { get; set; }
+
+        List<MembersOfConference> membership { get; set; }
+
     }
 }

@@ -31,11 +31,8 @@
                 <li><a href="@Url.Action("Index", "User")"><span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-arrow-left"></span></a></li>
 
                 <li onclick="brows('@Url.Action("GetAllUsers", "User")')"><a href="#">Все пользователи<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
-                <li onclick="brows('@Url.Action("GetLead", "User")')"><a href="#">Руководители<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
-                <li onclick="brows('@Url.Action("GetMemberGroup", "User")')"><a href="#">Пользователи<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
-
-                @*<li><a href="@Url.Action("GetLead", "User")">Руководители групп<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
-                    <li><a href="@Url.Action("GetMemberGroup", "User")">Участники групп<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>*@
+                <li onclick="brows('@Url.Action("GetLead", "User")')"><a href="#">Руководители групп<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
+                <li onclick="brows('@Url.Action("GetMemberGroup", "User")')"><a href="#">Участники групп<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon"></span></a></li>
 
             </ul>
         </div>
@@ -52,7 +49,6 @@
 
         <script>
             function brows(url) {
-                debugger;
                 $.get(url,
                     function (data) {
                         $('#result').html(data);

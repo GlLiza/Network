@@ -191,6 +191,7 @@ namespace Network.Controllers
         [HttpGet]
         public ActionResult EditUser()
         {
+            
             var model = GetProfileFromPage();
 
             return View("EditUser",model);
@@ -199,16 +200,19 @@ namespace Network.Controllers
         [HttpPost]
         public ActionResult EditUser(UserIndexViewModel model)
         {
-            if (model != null)
+            if (ModelState.IsValid)
             {
-                Aducation aducation = new Aducation() {
+
+                Aducation aducation = new Aducation()
+                {
                     Type = model.Type,
                     Institution = model.Specialization,
                     StartYear = model.StartYear,
                     GradYear = model.GradYear,
                     Specialization = model.Specialization
                 };
-                User_sContact contact = new User_sContact() {
+                User_sContact contact = new User_sContact()
+                {
                     PhoneNumber = model.PhoneNumber,
                     Skype = model.Skype
                 };
@@ -223,10 +227,19 @@ namespace Network.Controllers
                 };
 
                 _userService.EditProfile(aducation, contact, data, user);
-                return RedirectToAction("Index","User");
+                return RedirectToAction("Index", "User");
+            }
+            else
+            {
+               // var model = GetProfileFromPage();
+
+                return View("EditUser", model);
             }
 
-            return RedirectToAction("Index", "User");
+           
+            
+
+            //return RedirectToAction("Index", "User");
         }
 
     }

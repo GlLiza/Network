@@ -35,12 +35,11 @@ namespace Network.Views.ViewModels
         public string AspUserId { get; set; }
 
         [DisplayName("Имя и фамилия")]
-        [RegularExpression(@"[a-zA-Zа-яёА-ЯЁ\s\-]+$", ErrorMessage = "Некорректные данные")]
+        [Required(ErrorMessage = "Введите свое имя")]
         public string Name { get; set; }
         public byte[] Image { get; set; }
 
         [DisplayName("Номер телефона")]
-        [RegularExpression(@"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Некорректный номер телефона")]
         public string PhoneNumber { get; set; }
         public string Skype { get; set; }
 
@@ -56,11 +55,11 @@ namespace Network.Views.ViewModels
         [RegularExpression(@"[a-zA-Zа-яёА-ЯЁ\s\-]+$", ErrorMessage = "Некорректные данные")]
         public string Specialization { get; set; }
 
-        [DisplayName("Год начала")]
-        [Range(1700, 2017, ErrorMessage = "Недопустимый год")]
+        [DisplayName("Дата начала")]
+        //[Range(1700, 2018, ErrorMessage = "Недопустимый год")]
         public Nullable<System.DateTime> StartYear { get; set; }
-        [DisplayName("Год окончания")]
-        [Range(1700, 2018, ErrorMessage = "Недопустимый год")]
+        [DisplayName("Дата окончания")]
+        //[Range(1700, 2018, ErrorMessage = "Недопустимый год")]
         public Nullable<System.DateTime> GradYear { get; set; }
 
     }

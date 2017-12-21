@@ -4,8 +4,6 @@ using Network.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Network.BL.WebServices
 {
@@ -132,6 +130,23 @@ namespace Network.BL.WebServices
 
                 }
             }
+        }
+
+        public IQueryable<Guid> ListConferIdsByMemberId(Guid userId)
+        {
+            if (userId != null)
+            {
+                return _conferRepository.GetConferIdList(userId);
+            }
+            return null;
+        }
+
+        public MembersOfConference GetMembership(Guid confId, Guid memId)
+        {
+            var membership = _conferRepository.GetMembership(confId, memId);
+            return membership;
+
+
         }
     }
 }

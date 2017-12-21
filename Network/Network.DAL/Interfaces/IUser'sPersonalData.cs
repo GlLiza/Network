@@ -8,6 +8,5 @@ namespace Network.DAL.Interfaces
         void AddData(User_sPersonalData data);
         void Update(User_sPersonalData data);
         User_sPersonalData Find(Guid id);
-
     }
 }

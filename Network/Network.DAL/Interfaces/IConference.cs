@@ -19,6 +19,9 @@ namespace Network.DAL.Interfaces
         IQueryable<MembersOfConference> CheckMember(Guid userId, Guid conferenceId);
         Guid GetConferenceIdByUserId(Guid userId);
 
+        IQueryable<Guid> GetConferIdList(Guid memberId);
+
+        MembersOfConference GetMembership(Guid confId, Guid memId);
 
 
     }

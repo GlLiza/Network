@@ -11,7 +11,6 @@ namespace Network.BL.WebServices
     {
         private readonly IGroup _groupRepository;
 
-
         public GroupService()     {        }
 
         public GroupService(GroupRepository groupRepository)
@@ -95,8 +94,6 @@ namespace Network.BL.WebServices
 
         }
 
-
-
         public void AddMembersToGroup(MembersOfGroup member)
         {
             if (member != null)
@@ -171,5 +168,7 @@ namespace Network.BL.WebServices
                 }               
             }           
         }
+
+      
     }
 }

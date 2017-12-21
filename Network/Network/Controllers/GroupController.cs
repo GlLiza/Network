@@ -4,26 +4,20 @@ using Network.DAL.EFModel;
 using Network.Views.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace Network.Controllers
 {
     public class GroupController : Controller
-    {
-        
-
+    {    
         private  GroupService _groupService;
         private  UserService _userService;
-
         public GroupController(GroupService groupService, UserService userService)
         {
             _groupService = groupService;
             _userService = userService;
         }
-
-        // GET: Gro
-        
+              
         public ActionResult Index()
         {
             List<GroupViewModel> model = new List<GroupViewModel>();
@@ -52,6 +46,7 @@ namespace Network.Controllers
             return View(model);
         }
 
+        [HttpGet]
         [Authorize(Roles = "secretary")]
         public ActionResult CreateGroup()
         {
@@ -77,8 +72,8 @@ namespace Network.Controllers
             }
             return RedirectToAction("Index","Group");
         }
-        
 
+        [Authorize(Roles = "group_member")]
         public ActionResult AddToGroup(Guid id)
         {
             MembersOfGroup member = new MembersOfGroup()
@@ -109,6 +104,18 @@ namespace Network.Controllers
             }
             else return null;
         }
+
+
+
+
+
+
+
+
+
+
+
+
         public bool CheckMember(Guid idMem,Guid idGro)
         {
             var res = _groupService.CheckMemberInGroup(idMem,idGro);

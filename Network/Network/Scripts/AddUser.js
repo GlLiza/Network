@@ -38,16 +38,5 @@
             nextStepWizard.removeAttr('disabled').trigger('click');
     });
 
-
-
     $('div.setup-panel div a.btn-primary').trigger('click');
-
-
-    $('#select').on('change', function () {
-        $('#hcity').removeClass('hidden');
-    })
-
-   
-
 });
-

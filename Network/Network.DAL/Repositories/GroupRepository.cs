@@ -7,9 +7,7 @@ namespace Network.DAL.Repositories
 {
     public class GroupRepository : RepositoryBase, IGroup
     {
-        public GroupRepository(InstitutNetworkContext context) : base(context) { }
-
-   
+        public GroupRepository(InstitutNetworkContext context) : base(context) { }   
 
         public void AddMembers(MembersOfGroup member)
         {
@@ -83,6 +81,7 @@ namespace Network.DAL.Repositories
             var member = _context.MembersOfGroup.FirstOrDefault(x => x.MembersId == membersId);
             return member.Id;
         }
+
 
     }
 }

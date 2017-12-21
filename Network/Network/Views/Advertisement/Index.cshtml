@@ -59,7 +59,7 @@
 
                 <div class="col-md-3">
                     <p>
-                        @Html.DisplayFor(modelItem => item.Date)
+                        @Html.DisplayFor(modelItem => item.Date.Day).@Html.DisplayFor(modelItem => item.Date.Month).@Html.DisplayFor(modelItem => item.Date.Year)
                 </div>
 
 
