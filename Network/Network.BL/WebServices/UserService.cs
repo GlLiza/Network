@@ -321,7 +321,19 @@ namespace Network.BL.WebServices
 
         }
 
-       
+        public string GetRoleNameByAspId(string id)
+        {
+            var item = _userRepository.GetRole(id);
+            return item;
+        }
+
+        public string GetRoleNameForUser(string id)
+        {
+            var roleId = _userRepository.GetRoleId(id);
+            var item = _userRepository.GetRole(roleId);
+            return item;
+        }
+
 
 
     }

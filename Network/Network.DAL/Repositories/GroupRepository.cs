@@ -82,6 +82,12 @@ namespace Network.DAL.Repositories
             return member.Id;
         }
 
+        public IQueryable<Guid> GetGroupsIdByMemberId(Guid memberId)
+        {
+            var groupIds = _context.MembersOfGroup.Where(x => x.MembersId == memberId).Select(x=>x.GroupId);
+            return groupIds;
+        }
+
 
     }
 }

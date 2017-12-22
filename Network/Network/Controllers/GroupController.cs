@@ -105,17 +105,6 @@ namespace Network.Controllers
             else return null;
         }
 
-
-
-
-
-
-
-
-
-
-
-
         public bool CheckMember(Guid idMem,Guid idGro)
         {
             var res = _groupService.CheckMemberInGroup(idMem,idGro);
@@ -172,7 +161,49 @@ namespace Network.Controllers
             return RedirectToAction("Index","Group");
         }
 
-      
+
+       
+        public ActionResult GroupsForUser()
+        {
+            var idString = User.Identity.GetUserId();
+            var id = _userService.GetUserIdByAspId(idString);
+            var user = _userService.GetUserById(id);
+
+            //var role = _userService.GetRoleNameForUser(idString);
+            //var role = ;    
+            List<Group> list = new List<Group>();
+
+            if (User.IsInRole("team_lead"))
+            {
+                 list = _groupService.GetGroupsForHead(user.PersonalDataId);
+            }
+            if (User.IsInRole("group_member"))
+            {
+                 list = _groupService.GetGroupsForUser(user.Id);
+            }
+          
+
+            List<GroupViewModel> model = new List<GroupViewModel>();
+            foreach (var item in list)
+            {
+                GroupViewModel gr = new GroupViewModel();
+                gr.Id = item.Id;
+
+                var userHead = _userService.GetUserPersData(item.HeadId);
+                gr.NameHead = userHead.Name;
+
+                gr.Number = Convert.ToInt32(item.Number);
+                gr.Specialization = item.Specialization;
+
+                model.Add(gr);
+            }
+
+
+            return View(model);
+        }
+
+
+        
 
 
 

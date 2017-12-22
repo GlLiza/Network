@@ -69,10 +69,26 @@ namespace Network.BL.WebServices
                 if (groupIdList != null)
                 {
                     var groupList = GetGroupList(groupIdList);
+                    return groupList;
                 }
             }
             return null;
         }
+
+        public List<Group> GetGroupsForUser(Guid userId)
+        {
+            if (userId != null)
+            {
+                var groupIdList = _groupRepository.GetGroupsIdByMemberId(userId); 
+                if (groupIdList != null)
+                {
+                    var groupList = GetGroupList(groupIdList);
+                    return groupList;
+                }
+            }
+            return null;
+        }
+       
 
         public IQueryable<Guid> GetListOfId()
         {

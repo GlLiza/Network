@@ -34,6 +34,12 @@
                {
                 <li id="addGroupModal" onclick="addGrModal(this)" data-url='@Url.Action("CreateGroup", "Group", null)'><a href="#">Добавить группу<span></span></a></li>
                }
+
+
+                @if (!User.IsInRole("secretary"))
+                {
+                    <li><a href="@Url.Action("GroupsForUser", "Group")"><span style="font-size: 16px;" class="pull-right hidden-xs showopacity">Мои группы</span></a></li>
+                }
           
             </ul>
         </div>
@@ -58,10 +64,9 @@
         <div class="col-md-3 bold">
             Руководитель
         </div>
-    </div>
+    </div>   
+</div>
 
-
-        </div>
 <div class="jumbotron container-show">
 
     <div class="row">
