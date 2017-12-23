@@ -4,6 +4,8 @@ using Network.DAL.EFModel;
 using Network.Views.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace Network.Controllers
@@ -46,8 +48,8 @@ namespace Network.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        [Authorize(Roles = "secretary")]
+        [System.Web.Mvc.HttpGet]
+        [System.Web.Mvc.Authorize(Roles = "secretary")]
         public ActionResult CreateGroup()
         {
             var leadList = GetLead();
@@ -56,8 +58,8 @@ namespace Network.Controllers
             return View("_CreateGroup",model);
         }
 
-        [HttpPost]
-        [Authorize(Roles = "secretary")]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.Authorize(Roles = "secretary")]
         public ActionResult CreateGroup(CreateGroup u)
         {
             if (u != null)
@@ -73,36 +75,36 @@ namespace Network.Controllers
             return RedirectToAction("Index","Group");
         }
 
-        [Authorize(Roles = "group_member")]
-        public ActionResult AddToGroup(Guid id)
-        {
-            MembersOfGroup member = new MembersOfGroup()
-            {
-                GroupId = id
-            };
-            return View("_AddToGroup", member);
-        }
+        //[Authorize(Roles = "group_member")]
+        //public ActionResult AddToGroup(Guid id)
+        //{
+        //    MembersOfGroup member = new MembersOfGroup()
+        //    {
+        //        GroupId = id
+        //    };
+        //    return View("_AddToGroup", member);
+        //}
 
-        [HttpPost]
-        [Authorize(Roles = "group_member")]
-        public ActionResult AddToGroup(MembersOfGroup member)
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Authorize(Roles = "group_member")]
+        public ActionResult AddToGroup(Guid memId,Guid groupId)
         {
-            if (member != null)
+            if (memId != null)
             {
-                var curUser = User.Identity.GetUserId();
-                var user = _userService.GetUserByAspNetId(curUser);
-                member.MembersId = user.Id;
-                var check = _groupService.CheckMemberInGroup(user.Id,member.GroupId);
-                if (check)
-                {
+                //var curUser = User.Identity.GetUserId();
+                //var user = _userService.GetUserByAspNetId(curUser);
+                //member.MembersId = user.Id;
+                //var check = _groupService.CheckMemberInGroup(user.Id,member.GroupId);
+                //if (check)
+                //{
                                    
-                    _groupService.AddMembersToGroup(member);
-                }
+                //    _groupService.AddMembersToGroup(member);
+                //}
                 
                 return RedirectToAction("Index", "Group");
 
             }
-            else return null;
+            else return RedirectToAction("Index", "Group");
         }
 
         public bool CheckMember(Guid idMem,Guid idGro)
@@ -146,14 +148,14 @@ namespace Network.Controllers
         }
 
 
-        [Authorize(Roles = "secretary")]
+        [System.Web.Mvc.Authorize(Roles = "secretary")]
         public ActionResult DeleteGroup(Guid id)
         {
             var group = _groupService.GetGroupById(id);
             return View("_Delete", group);
         }
-        [Authorize(Roles = "secretary")]
-        [HttpPost]
+        [System.Web.Mvc.Authorize(Roles = "secretary")]
+        [System.Web.Mvc.HttpPost]
         public ActionResult DeleteGroup(Group gr)
         {
            _groupService.DeleteMembersInGroup(gr.Id);           
@@ -202,8 +204,43 @@ namespace Network.Controllers
             return View(model);
         }
 
+        [System.Web.Mvc.Authorize(Roles = "team_lead")]
+        public ActionResult AddMembToGroup(Guid groupId)
+        {
+            AddToGroupMember model = new AddToGroupMember();
+            var aspIdsAllUsers = _userService.GetAllMemberListId();
 
-        
+            var listIdAllMem = _userService.GetUserIdForListAspId(aspIdsAllUsers);
+            var listIdGroupMem = _groupService.GetmembersListByGroupId(groupId).ToList();
+
+            var listId = _userService.ExcludeListIdInLIs(listIdAllMem, listIdGroupMem);
+
+            var userList = _userService.GetDataForListOfUser(listId);
+
+            List<UserListViewModel> modell = new List<UserListViewModel>();
+            foreach (var item in userList)
+            {
+                UserListViewModel user = new UserListViewModel();
+                user.Id = item.Id;
+                user.Name = item.Name;
+                user.Image = _userService.GetImageByDataId(item.Id);
+
+                modell.Add(user);
+            }
+            model.grId = groupId;
+            model.ListUser = modell;
+
+
+
+            return PartialView("_AddMembToGroup",model);
+        } 
+
+        //[Authorize(Roles = "team_lead")]
+        //public ActionResult AddMembToGroup()
+        //{
+        //    return View();
+        //}
+
 
 
 

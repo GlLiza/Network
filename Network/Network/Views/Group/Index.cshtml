@@ -90,11 +90,10 @@
                     <button class="btn dropdown-toggle" data-toggle="dropdown"><span>...</span></button>
                     <ul class="dropdown-menu">
                         <li id="listMem" onclick="openModal(this)" data-url='@Url.Action("ListMembersOfGroup", "Group",new { id=item.Id})'><a href="#">Участники<span style="font-size: 16px;"></span></a></li>
-                        @if (User.IsInRole("group_member"))
-                        {
-                            
+                        @*@if (User.IsInRole("team_lead"))
+                        {                            
                             <li id="joinToGroup" onclick="joinToGroup(this)" data-url='@Url.Action("AddToGroup", "Group",new { id=item.Id})'><a href="#">Присоединиться к группе<span style="font-size: 16px;"></span></a></li>
-                        }
+                        }*@
 
                         @if (User.IsInRole("secretary"))
                         {
@@ -111,10 +110,10 @@
                     </div>
                 </div>
 
-                <div id="joinMod" class="modal fade" >
+                @*<div id="joinMod" class="modal fade" >
                     <div id="joinContainer">
                     </div>
-                </div>
+                </div>*@
 
                 <div id="delGroup" class="modal fade" >
                     <div id="delContainer">
@@ -190,17 +189,17 @@
             };
 
 
-            function joinToGroup(element) {
-                var url = $(element).data('url');
+            //function joinToGroup(element) {
+            //    var url = $(element).data('url');
 
-                $.get(url,
-                    function (data) {
-                        $('#joinContainer').html(data);
+            //    $.get(url,
+            //        function (data) {
+            //            $('#joinContainer').html(data);
 
-                        $('#joinMod').modal('show');
-                    });
+            //            $('#joinMod').modal('show');
+            //        });
 
-            };
+            //};
         </script>
     }
 

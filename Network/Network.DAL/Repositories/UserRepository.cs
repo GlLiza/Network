@@ -58,6 +58,7 @@ namespace Network.DAL.Repositories
             return aspNetUserId;
         }
 
+      
         public string GetRoleId(string userId)
         {
             var roleId = _context.AspNetUserRoles.FirstOrDefault(x => x.UserId == userId).ToString();

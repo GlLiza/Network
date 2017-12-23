@@ -134,7 +134,23 @@ namespace Network.BL.WebServices
             return result;
         }
 
-        public List<User_sPersonalData> GetDataForListOfUserByAspId(IQueryable<string> list)
+        public List<User_sPersonalData> GetDataForListOfUser(List<Guid> list)
+        {
+            List<User_sPersonalData> result = new List<User_sPersonalData>();
+
+            if (list != null)
+            {
+                foreach (var id in list)
+                {
+                    var itemUser = _userRepository.Find(id);
+                    var itemPersonalData = _persDataRepository.Find(itemUser.PersonalDataId);
+                    result.Add(itemPersonalData);
+                }
+            }
+            return result;
+        }
+
+            public List<User_sPersonalData> GetDataForListOfUserByAspId(IQueryable<string> list)
         {
             List<User_sPersonalData> result = new List<User_sPersonalData>();
 
@@ -334,7 +350,26 @@ namespace Network.BL.WebServices
             return item;
         }
 
+        public List<Guid> ExcludeListIdInLIs(List<Guid> listIdsUsers, List<Guid> listIdGroupMem)
+        {
+            var dif = listIdsUsers.Where(x => !listIdGroupMem.Contains(x));
+            var result = listIdsUsers.Where(x => dif.Contains(x)).ToList();
 
+            return result;
+        }
+
+        public List<Guid> GetUserIdForListAspId(IQueryable<string> stringId)
+        {
+            List<Guid> list = new List<Guid>();
+
+            foreach (var item in stringId)
+            {
+                var user = GetUserByAspNetId(item);
+                list.Add(user.Id);
+            }
+
+            return list;
+        }
 
     }
 }

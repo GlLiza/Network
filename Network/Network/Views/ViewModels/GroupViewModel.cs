@@ -54,5 +54,11 @@ namespace Network.Views.ViewModels
         public DateTime Date { get; set; }
         public string Place { get; set; }
         public bool MembersStatus { get; set; }
-    }    
+    }
+
+    public class AddToGroupMember
+    {
+        public Guid grId { get; set; }
+        public List<UserListViewModel> ListUser { get; set; }
+    }
 }

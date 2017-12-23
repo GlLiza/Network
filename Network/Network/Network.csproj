@@ -262,6 +262,7 @@
     <Content Include="Views\Conference\GetListConferenceForUser.cshtml" />
     <Content Include="Views\Conference\_LeaveConference.cshtml" />
     <Content Include="Views\Group\GroupsForUser.cshtml" />
+    <Content Include="Views\Group\_AddMembToGroup.cshtml" />
     <Resource Include="Content\Pictures\no.png" />
     <Content Include="Content\register.css" />
     <Content Include="favicon.ico" />
