@@ -15,6 +15,7 @@ namespace Network.DAL.Interfaces
         IQueryable<string> GetAllMemberId();
         User_sPersonalData FindData(Guid id);
         string GetRoleId(string userId);
-        string GetRole(string id);    
-        }
+        string GetRole(string id);
+        User GetByPersDataId(Guid id);
+    }
 }

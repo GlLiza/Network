@@ -371,5 +371,10 @@ namespace Network.BL.WebServices
             return list;
         }
 
+        public User GetUserByUserPersDataId(Guid persDataId)
+        {
+            var user=_userRepository.GetByPersDataId(persDataId);
+            return user;
+        }
     }
 }

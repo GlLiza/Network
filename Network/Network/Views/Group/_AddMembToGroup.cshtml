@@ -57,22 +57,17 @@
         //debugger;
             $.ajax({
                 url: '@Url.Action("AddToGroup", "Group")',
-                //dataType: 'json',
-                //cache: false,
                 type: 'POST',
                 data: JSON.stringify({ "memId": memId, "groupId": grId}),
                 contentType: 'application/json; charset=utf-8',
-                //data: JSON.stringify({ "memId": memId}),
                 success: function (response) {
-                    //debugger;
-                    $('#addToGr').modal('hide');
+                    $('#joinMod').modal('hide');
                
 
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
-                  //  debugger;
-                $('#addToGr').modal('hide');
-                }
+                //error: function(xhr, ajaxOptions, thrownError) {
+                //$('#addToGr').modal('hide');
+                //}
                 });
     };
 

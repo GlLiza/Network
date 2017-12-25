@@ -280,7 +280,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MembersOfGroup_User">
+        <Association Name="FK_MembersOfGroup_User1">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="MembersOfGroup" Type="Self.MembersOfGroup" Multiplicity="*" />
           <ReferentialConstraint>
@@ -406,7 +406,7 @@
             <End Role="Group" EntitySet="Group" />
             <End Role="MembersOfGroup" EntitySet="MembersOfGroup" />
           </AssociationSet>
-          <AssociationSet Name="FK_MembersOfGroup_User" Association="Self.FK_MembersOfGroup_User">
+          <AssociationSet Name="FK_MembersOfGroup_User1" Association="Self.FK_MembersOfGroup_User1">
             <End Role="User" EntitySet="User" />
             <End Role="MembersOfGroup" EntitySet="MembersOfGroup" />
           </AssociationSet>
@@ -513,10 +513,6 @@
             <End Role="User_sPersonalData" EntitySet="User_sPersonalData" />
             <End Role="Group" EntitySet="Group" />
           </AssociationSet>
-          <AssociationSet Name="FK_MembersOfGroup_User" Association="NetworkContext.FK_MembersOfGroup_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="MembersOfGroup" EntitySet="MembersOfGroup" />
-          </AssociationSet>
           <EntitySet Name="Advertisement" EntityType="NetworkContext.Advertisement" />
           <AssociationSet Name="FK_Advertisement_AspNetUsers" Association="NetworkContext.FK_Advertisement_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -531,6 +527,10 @@
           <AssociationSet Name="FK_User_sPersonalData_Aducation" Association="NetworkContext.FK_User_sPersonalData_Aducation">
             <End Role="Aducation" EntitySet="Aducation" />
             <End Role="User_sPersonalData" EntitySet="User_sPersonalData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembersOfGroup_User1" Association="NetworkContext.FK_MembersOfGroup_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="MembersOfGroup" EntitySet="MembersOfGroup" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -666,7 +666,7 @@
           <Property Name="GroupId" Type="Guid" Nullable="false" />
           <Property Name="MembersId" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Group" Relationship="NetworkContext.FK_MembersOfGroup_Group" FromRole="MembersOfGroup" ToRole="Group" />
-          <NavigationProperty Name="User" Relationship="NetworkContext.FK_MembersOfGroup_User" FromRole="MembersOfGroup" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="NetworkContext.FK_MembersOfGroup_User1" FromRole="MembersOfGroup" ToRole="User" />
         </EntityType>
         <Association Name="FK_MembersOfGroup_Group">
           <End Type="NetworkContext.Group" Role="Group" Multiplicity="1" />
@@ -703,7 +703,7 @@
           <NavigationProperty Name="MembersOfConference" Relationship="NetworkContext.FK_MembersOfConference_User" FromRole="User" ToRole="MembersOfConference" />
           <NavigationProperty Name="User_sContact" Relationship="NetworkContext.FK_User_User_sContact" FromRole="User" ToRole="User_sContact" />
           <NavigationProperty Name="User_sPersonalData" Relationship="NetworkContext.FK_User_User_sPersonalData" FromRole="User" ToRole="User_sPersonalData" />
-          <NavigationProperty Name="MembersOfGroup" Relationship="NetworkContext.FK_MembersOfGroup_User" FromRole="User" ToRole="MembersOfGroup" />
+          <NavigationProperty Name="MembersOfGroup" Relationship="NetworkContext.FK_MembersOfGroup_User1" FromRole="User" ToRole="MembersOfGroup" />
         </EntityType>
         <Association Name="FK_User_AspNetUsers">
           <End Type="NetworkContext.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
@@ -811,18 +811,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MembersOfGroup_User">
-          <End Type="NetworkContext.User" Role="User" Multiplicity="1" />
-          <End Type="NetworkContext.MembersOfGroup" Role="MembersOfGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MembersOfGroup">
-              <PropertyRef Name="MembersId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Advertisement">
           <Key>
             <PropertyRef Name="Id" />
@@ -888,6 +876,18 @@
             </Principal>
             <Dependent Role="User_sPersonalData">
               <PropertyRef Name="AducationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembersOfGroup_User1">
+          <End Type="NetworkContext.User" Role="User" Multiplicity="1" />
+          <End Type="NetworkContext.MembersOfGroup" Role="MembersOfGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MembersOfGroup">
+              <PropertyRef Name="MembersId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

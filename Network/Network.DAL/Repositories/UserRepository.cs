@@ -70,5 +70,11 @@ namespace Network.DAL.Repositories
             var role = _context.AspNetRoles.Find(id);
             return role.Name;
         }
+
+        public User GetByPersDataId(Guid id)
+        {
+            var user = _context.User.FirstOrDefault(x => x.PersonalDataId == id);
+            return user;
+        }
     }
 }

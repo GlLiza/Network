@@ -23,26 +23,52 @@ namespace Network.Controllers
         // GET: Conference
         public ActionResult Index()
         {
-            var idString = User.Identity.GetUserId();
-            var id = _userService.GetUserIdByAspId(idString);
 
             List<ConferenceViewModel> model = new List<ConferenceViewModel>();
             var conferListId = _conService.GetConferenceList();
-            if (conferListId != null)
+            var listConference = _conService.GetConferList(conferListId);
+            if (!User.IsInRole("secretary"))
             {
-                var listConference = _conService.GetConferList(conferListId);
-                foreach (var item in listConference)
+                var idString = User.Identity.GetUserId();
+                var id = _userService.GetUserIdByAspId(idString);
+
+                if (conferListId != null)
                 {
-                    ConferenceViewModel confer = new ConferenceViewModel();
-                    confer.Id = item.Id;
-                    confer.Thema = item.Thema;
-                    confer.Date = Convert.ToDateTime(item.Date);
-                    confer.Place = item.Place;
-                    confer.MembersStatus =_conService.CheckMemberInConference(id,item.Id);
-                    model.Add(confer);
+
+                    foreach (var item in listConference)
+                    {
+                        ConferenceViewModel confer = new ConferenceViewModel();
+                        confer.Id = item.Id;
+                        confer.Thema = item.Thema;
+                        confer.Date = Convert.ToDateTime(item.Date);
+                        confer.Place = item.Place;
+                        confer.MembersStatus = _conService.CheckMemberInConference(id, item.Id);
+                        model.Add(confer);
+                    }
                 }
+                return View(model);
             }
-            return View(model);
+
+            else
+            {
+                if (conferListId != null)
+                {
+
+                    foreach (var item in listConference)
+                    {
+                        ConferenceViewModel confer = new ConferenceViewModel();
+                        confer.Id = item.Id;
+                        confer.Thema = item.Thema;
+                        confer.Date = Convert.ToDateTime(item.Date);
+                        confer.Place = item.Place;
+                        confer.MembersStatus = true;
+                        model.Add(confer);
+                    }
+                }
+                return View(model);
+
+            }
+
         }
 
         [Authorize(Roles = "secretary")]

@@ -275,7 +275,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MembersOfGroup_User">
+  <Association Name="FK_MembersOfGroup_User1">
     <End Role="User" Type="Self.User" Multiplicity="1" />
     <End Role="MembersOfGroup" Type="Self.MembersOfGroup" Multiplicity="*" />
     <ReferentialConstraint>
@@ -401,7 +401,7 @@
       <End Role="Group" EntitySet="Group" />
       <End Role="MembersOfGroup" EntitySet="MembersOfGroup" />
     </AssociationSet>
-    <AssociationSet Name="FK_MembersOfGroup_User" Association="Self.FK_MembersOfGroup_User">
+    <AssociationSet Name="FK_MembersOfGroup_User1" Association="Self.FK_MembersOfGroup_User1">
       <End Role="User" EntitySet="User" />
       <End Role="MembersOfGroup" EntitySet="MembersOfGroup" />
     </AssociationSet>
