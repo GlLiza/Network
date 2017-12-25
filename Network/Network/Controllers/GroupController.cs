@@ -75,16 +75,6 @@ namespace Network.Controllers
             return RedirectToAction("Index","Group");
         }
 
-        //[Authorize(Roles = "group_member")]
-        //public ActionResult AddToGroup(Guid id)
-        //{
-        //    MembersOfGroup member = new MembersOfGroup()
-        //    {
-        //        GroupId = id
-        //    };
-        //    return View("_AddToGroup", member);
-        //}
-
         [System.Web.Mvc.Authorize(Roles = "team_lead")]
         public ActionResult AddMembToGroup(Guid groupId)
         {
@@ -116,10 +106,8 @@ namespace Network.Controllers
             return PartialView("_AddMembToGroup", model);
         }
 
-
-
         [System.Web.Http.HttpPost]
-        [System.Web.Http.Authorize(Roles = "group_member")]
+        [System.Web.Http.Authorize(Roles = "team_lead")]
         public ActionResult AddToGroup(Guid memId,Guid groupId)
         {
             var user = _userService.GetUserByUserPersDataId(memId);
@@ -128,10 +116,6 @@ namespace Network.Controllers
             if (check == true)
             {
                 MembersOfGroup members = new MembersOfGroup();
-                //{
-                //    MembersId = memId,
-                //    GroupId = groupId
-                //};
                 members.GroupId = groupId;
                 members.MembersId = user.Id;
                 _groupService.AddMembersToGroup(members);
@@ -140,18 +124,19 @@ namespace Network.Controllers
             else return RedirectToAction("Index", "Group");               
             }
 
+        [System.Web.Http.Authorize(Roles = "team_lead")]
+        public ActionResult RemoveFromGroup(Guid memId, Guid groupId)
+        {
+            var user = _userService.GetUserByUserPersDataId(memId);
+            _groupService.DeleteMemberInGroup(groupId, user.Id);
+            return RedirectToAction("GroupsForUser", "Group");
+        }
 
-        //public bool CheckMember(Guid idMem,Guid idGro)
-        //{
-        //    var res = _groupService.CheckMemberInGroup(idMem,idGro);
-        //    return res;
 
-        //}
 
-        
         public ActionResult ListMembersOfGroup(Guid id)
         {
-            List<UserListViewModel> model = new List<UserListViewModel>();
+            List<UserListViewModel> members = new List<UserListViewModel>();
             var listMembersId = _groupService.GetmembersListByGroupId(id);
             var data = _userService.GetDataForListOfUser(listMembersId);
 
@@ -162,13 +147,17 @@ namespace Network.Controllers
                 user.Name = item.Name;
                 user.Image = _userService.GetImageByDataId(item.Id);
 
-                model.Add(user);
+                members.Add(user);
             }
 
+            UserListOfGroupViewModel model = new UserListOfGroupViewModel();
+            model.Members = members;
+            model.Id = id;
+            model.Status = _groupService.CheckHeadGroup(User.Identity.GetUserId(),id);
+           
             return PartialView("_ListMembersOfGroup", model);
         }
-
-
+        
         [System.Web.Mvc.Authorize(Roles = "secretary")]
         public ActionResult DeleteGroup(Guid id)
         {
@@ -191,9 +180,7 @@ namespace Network.Controllers
             var idString = User.Identity.GetUserId();
             var id = _userService.GetUserIdByAspId(idString);
             var user = _userService.GetUserById(id);
-
-            //var role = _userService.GetRoleNameForUser(idString);
-            //var role = ;    
+            
             List<Group> list = new List<Group>();
 
             if (User.IsInRole("team_lead"))

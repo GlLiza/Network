@@ -11,7 +11,7 @@
             </div>
             @Html.HiddenFor(x=>x.grId, new { @id="hiddenId"})
             <div class="modal-body">
-                @if (Model!=null)
+                @if (Model.ListUser.Count!=0)
                 {
                     foreach (var item in Model.ListUser)
                     {
@@ -37,7 +37,7 @@
                 else
                 {
                     <div class="col-md-12">
-                        <p>На данный момент участников нет.</p>
+                        <p>На данный момент все участники состоят в этой группе.</p>
                     </div>
                 }
             </div>

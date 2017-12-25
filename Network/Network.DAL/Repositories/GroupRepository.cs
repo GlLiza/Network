@@ -76,6 +76,9 @@ namespace Network.DAL.Repositories
             return member;
         }
 
+        
+
+
         public Guid GetGroupIdByMembersId(Guid membersId)
         {
             var member = _context.MembersOfGroup.FirstOrDefault(x => x.MembersId == membersId);
@@ -88,6 +91,11 @@ namespace Network.DAL.Repositories
             return groupIds;
         }
 
+        public MembersOfGroup GetMembersByGroupUser(Guid groupId, Guid memberId)
+        {
+            var membership = _context.MembersOfGroup.FirstOrDefault(x => x.GroupId == groupId && x.MembersId == memberId);
+            return membership;
+        }
 
     }
 }

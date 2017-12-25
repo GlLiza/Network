@@ -21,7 +21,7 @@ namespace Network.DAL.Interfaces
         Guid GetGroupIdByMembersId(Guid membersId);
         IQueryable<Guid> GetGroupsIdByMemberId(Guid memberId);
 
-
+        MembersOfGroup GetMembersByGroupUser(Guid groupId, Guid memberId);
 
     }
 }

@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Network.Views.ViewModels.UserListViewModel>
-
+﻿@model Network.Views.ViewModels.UserListOfGroupViewModel
 
 <div id="listMembersDialog">
     <div class="modal-dialog">
@@ -11,9 +10,9 @@
             </div>
 
             <div class="modal-body">
-                @if (Model.Count() != 0)
+                @if (Model.Members.Count != 0)
                 {
-                    foreach (var item in Model)
+                    foreach (var item in Model.Members)
                     {
                         <div class="row">
                             @if (item.Image.Length != 0)
@@ -24,8 +23,14 @@
                             }
                             <div class="col-md-4">
                                 @Html.DisplayFor(modelItem => item.Name)
-                            </div>
 
+                                @if (User.IsInRole("team_lead") && Model.Status==true)
+                                {
+                                <H6>
+                                    @Html.ActionLink("Удалить", "RemoveFromGroup", "Group", new { memId = item.Id, groupId = Model.Id}, null)
+                                </H6>
+}
+                            </div>
                         </div>
 
                     }

@@ -10,12 +10,16 @@ namespace Network.BL.WebServices
     public class GroupService
     {
         private readonly IGroup _groupRepository;
+        private readonly IUser _userRepository;
+        private readonly IUser_sPersonalData _dataRepository;
 
         public GroupService()     {        }
 
-        public GroupService(GroupRepository groupRepository)
+        public GroupService(GroupRepository groupRepository,UserRepository userRepository, User_sPersonalDataRepository dataRepository)
         {
             _groupRepository = groupRepository;
+            _userRepository = userRepository;
+            _dataRepository = dataRepository;
         }
         
         public void AddGroup(Group gr)
@@ -149,6 +153,18 @@ namespace Network.BL.WebServices
                 else return true;
         }
 
+        public bool CheckHeadGroup(string headId, Guid groupId)
+        {
+
+            var group = _groupRepository.GetGroupById(groupId);
+            var user = _userRepository.GetUserByAspUserId(headId);
+            var data = _dataRepository.Find(user.User_sPersonalData.Id);
+            if (data.Id == group.HeadId)
+                return true;
+            else return false;
+        }
+
+
         public List<MembersOfGroup> GetListMembersByListId(IQueryable<Guid> listId)
         {
             List<MembersOfGroup> result = new List<MembersOfGroup>();
@@ -185,6 +201,16 @@ namespace Network.BL.WebServices
             }           
         }
 
-      
+        public void DeleteMemberInGroup(Guid groupId, Guid memberId)
+        {
+            var membership = _groupRepository.GetMembersByGroupUser(groupId, memberId);
+            if (membership != null)
+            {
+                _groupRepository.DeleteMembers(membership.Id);
+            }
+
+        }
+
+
     }
 }

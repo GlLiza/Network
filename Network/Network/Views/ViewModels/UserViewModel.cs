@@ -1,5 +1,6 @@
 ﻿using Network.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
@@ -27,6 +28,14 @@ namespace Network.Views.ViewModels
         public Guid Id { get; set; }
         public string Name { get; set; }
         public byte[] Image { get; set; }
+    }
+
+    public class UserListOfGroupViewModel
+    {
+        public Guid Id { get; set; }
+        public bool Status { get; set; }
+
+        public List<UserListViewModel> Members { get; set; }
     }
 
     public class UserIndexViewModel
