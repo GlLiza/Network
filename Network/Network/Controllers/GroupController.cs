@@ -153,8 +153,12 @@ namespace Network.Controllers
             UserListOfGroupViewModel model = new UserListOfGroupViewModel();
             model.Members = members;
             model.Id = id;
-            model.Status = _groupService.CheckHeadGroup(User.Identity.GetUserId(),id);
-           
+            if (!User.IsInRole("secretary"))
+            {
+                model.Status = _groupService.CheckHeadGroup(User.Identity.GetUserId(), id);
+            }
+            else model.Status = false;
+
             return PartialView("_ListMembersOfGroup", model);
         }
         
